@@ -3,7 +3,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 0px 50px;
+    padding-left: 50px;
     height: 60px;
     background-color: $dark;
     color: $text-light;
@@ -16,7 +16,8 @@
     }
 
     .menu {
-        display: flex;
+        display: none;
+        margin-right: 50px;
         
         .item {
             padding: 0px 5px;
@@ -31,4 +32,49 @@
             }
         }
     }
+
+    @media (min-width: 500px) {
+        .hamburger {
+            display: none;
+        }
+
+        .menu {
+            display: flex;
+        }
+    }
+}
+
+.hamburger {
+    height: 60px;
+    width: 60px;
+
+    .stripes {
+        height: 30px;
+        width: 30px;
+        margin: 15px;
+        background: linear-gradient(
+            to bottom, 
+            white, white 20%, 
+            black 20%, black 40%, 
+            white 40%, white 60%, 
+            black 60%, black 80%, 
+            white 80%, white 100%
+        );
+    }    
+}
+
+.ham-menu {
+    visibility: collapse;
+    width: calc(100% - 20);
+    background-color: $dark;
+    color: $light;
+    text-align: right;
+    height: 0px;
+    overflow: hidden;
+}
+
+.open {
+    visibility: visible;    
+    padding: 10px;
+    height: auto;
 }

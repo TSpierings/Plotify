@@ -20,8 +20,7 @@ export class SwitchComponent implements OnInit {
     if (this.selectedItem === item) {
       return;
     }
-
-    console.log(item);
+    
     this.selectedItem = item;
     this.selectionChanged.emit(item);
   }
