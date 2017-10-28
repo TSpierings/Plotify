@@ -41,8 +41,7 @@ export class LandingPageComponent implements OnInit {
 
     if (token) {
       console.log('Already logged in');
-      this.router.navigate(['/']);
-      this.getTop();
+      this.router.navigate(['/top-artists']);
     } else {
       console.log('Logging in');
       this.login();
@@ -58,17 +57,5 @@ export class LandingPageComponent implements OnInit {
 
     this.document.location.href = 
       `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
-  }
-
-  private getTop() {
-    const token = localStorage.getItem('access_token');
-    const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    const url = 'https://api.spotify.com/v1/me/top/artists';
-    this.http.get(url, { headers: header}).toPromise()
-      .then(data => {
-        console.log(data);
-        this.topArtists = data as TopArtists;
-      })
-      .catch(error => console.log(error));
   }
 }
