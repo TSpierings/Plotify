@@ -32,6 +32,7 @@ export class TopArtistsComponent implements OnInit {
 
         if (this.topArtists == null) {
           this.topArtists = newArtists;
+          return;
         }
 
         this.topArtists.items.push(...newArtists.items);     

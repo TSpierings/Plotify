@@ -15,10 +15,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 1000px;
+        width: calc(100% - 10px);
+        max-width: 1000px;
         height: 25px;
+        margin: 0px 5px;
         background-color: $dark;
         color: $text-light;
         cursor: pointer;
+    }
+
+    @media (max-width: 1000px) {
+        .load-more {
+            max-width: 490px;
+        }
     }
 }
