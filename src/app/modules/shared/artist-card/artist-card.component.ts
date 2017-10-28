@@ -9,6 +9,7 @@ import { Item } from '../../interfaces/artists';
 export class ArtistCardComponent implements OnInit {
 
   @Input() artist: Item;
+  @Input() rank: Number;
 
   constructor() { }
 
