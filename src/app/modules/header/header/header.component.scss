@@ -1,0 +1,30 @@
+@import 'src/app/scss/colors';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    height: 60px;
+    background-color: $dark;
+    color: $text-light;
+    align-items: center;
+
+    .logo {
+        span {
+            font-size: 20px;
+        }
+    }
+
+    .menu {
+        display: flex;
+        
+        .item {
+            padding: 0px 5px;
+            border-right: 1px solid $light;
+
+            &:last-child {
+                border: none;
+            }
+        }
+    }
+}
