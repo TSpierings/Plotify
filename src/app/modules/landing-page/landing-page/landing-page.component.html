@@ -1,13 +1,3 @@
 <div class="artist-list">
-  <div class="artist-card" *ngFor="let artist of topArtists?.items">
-    <img width="64" height="64" [src]="artist.images[2].url"/>
-    <div class="data">
-      <span>{{artist.name}}</span>
-      <span>Popularity: {{artist.popularity}}</span>
-      <span>Folowers: {{artist.followers.total}}</span>
-    </div>
-    <div class="genres">
-      <div class="genre-label" *ngFor="let genre of artist.genres">{{genre}}</div>
-    </div>
-  </div>
+  <app-artist-card *ngFor="let artist of topArtists?.items" [artist]="artist"></app-artist-card>
 </div>
