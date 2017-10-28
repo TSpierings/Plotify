@@ -1,12 +1,10 @@
 @import 'src/app/scss/colors';
 
-.artist-card {
-    display: flex;
-    flex-direction: column;        
+.artist-card {  
     margin: 5px;
     background-color: $dark;
     color: $text-light;
-    width: 500px;
+    max-width: 500px;
     height: calc(100% - 10px);
 
     .top {
@@ -30,6 +28,7 @@
 
         .genres {
             display: flex;
+            width: 100%;
             flex-wrap: wrap;
 
             .genre-label {
