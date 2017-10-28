@@ -1,0 +1,9 @@
+<div class="header">
+  <div class="content">
+    <app-switch
+      [selectableItems]="selectableItems"
+      [selectedItem]="selectableItems[1]"
+      (selectionChanged)="selectedItemChanged($event)">
+    </app-switch>
+  </div>  
+</div>

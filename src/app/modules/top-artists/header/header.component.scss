@@ -1,0 +1,15 @@
+@import 'src/app/scss/colors';
+
+.header {
+    display: flex;
+    justify-content: center;
+    background-color: $dark;
+    color: $text-light;
+    border-top: 1px solid $light;
+    padding: 2px;
+
+    .content {
+        width: 100%;
+        max-width: 1000px;
+    }    
+}

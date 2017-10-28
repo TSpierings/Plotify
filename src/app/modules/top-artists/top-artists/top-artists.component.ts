@@ -12,6 +12,7 @@ export class TopArtistsComponent implements OnInit {
   topArtists: TopArtists;
 
   private offset: number = 0;
+  private timeRange: string = "medium_term"
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +25,7 @@ export class TopArtistsComponent implements OnInit {
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
     const url = 'https://api.spotify.com/v1/me/top/artists';
     let params = new HttpParams().set('offset', this.offset.toString());
+    params = params.set('time_range', this.timeRange);
 
     this.http.get(url, { headers: header, params: params}).toPromise()
       .then(data => {
@@ -38,5 +40,12 @@ export class TopArtistsComponent implements OnInit {
         this.topArtists.items.push(...newArtists.items);     
       })
       .catch(error => console.log(error));
+  }
+
+  changeTimeRange(timeRange: string) {
+    this.timeRange = timeRange;
+    this.offset = 0;
+    this.topArtists = null;
+    this.getTop();
   }
 }
