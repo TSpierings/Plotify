@@ -1,9 +1,11 @@
+@import 'src/app/scss/colors';
+
 .artist-card {
     display: flex;
     flex-direction: column;        
     margin: 10px;
-    background-color: #111;
-    color: #f2f2f2;
+    background-color: $dark;
+    color: $text-light;
     font-family: sans-serif;
     width: 500px;
 
@@ -33,8 +35,8 @@
             .genre-label {
                 margin: 2px;
                 padding: 0px 5px;
-                background-color: #f2f2f2;
-                color: #111;
+                background-color: $light;
+                color: $dark;
                 border-radius: 3px;
             }
         }
