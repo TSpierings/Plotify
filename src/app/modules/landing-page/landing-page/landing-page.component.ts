@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { TopArtists, Item } from '../../interfaces/artists';
-import { environment } from '../../../../environments/environment';
+import { AuthService } from '../../auth-service/auth-service/auth.service'
 
 @Component({
   selector: 'app-landing-page',
@@ -15,48 +14,45 @@ export class LandingPageComponent implements OnInit {
   topArtists: TopArtists = null;
 
   constructor(
-    @Inject(DOCUMENT) private document: any,
+    private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private http: HttpClient) { }
 
   ngOnInit() {    
+    this.readFragments();    
+
+    const token = this.authService.getToken();
+
+    if (token) {
+      this.router.navigate(['/top-artists']);
+      return;
+    }
+
+    this.authService.login();
+  }
+
+  private readFragments() {
     this.activatedRoute.fragment.subscribe((fragment: string) => {
-      console.log('Checking callback params');
       
       if (fragment != null) {
         let accessToken = fragment.match(/^(.*?)&/)[1].replace('access_token=', '');
-        let state = fragment.match(/^(.*?)&/)[1].replace('state=', '');
+        let expiresIn = Number.parseInt(fragment.match(/expires_in=([0-9]*)/)[1]) * 1000 + new Date().getTime();
+        let state = fragment.match(/state=(.*)/)[1];
 
-        console.log(state);
+        if (accessToken == null || expiresIn == null || state == null) {
+          console.log('Fragmet does not contain tokens!');
+          return;
+        }
 
-        if (accessToken != null) {
-          console.log('Storing token');
-          localStorage.setItem('access_token', accessToken);
-        } 
+        if (localStorage.getItem('state') != state) {
+          console.log('Wrong state identifer!');
+          return;
+        }
+
+        localStorage.setItem('access_token', accessToken);
+        localStorage.setItem('expires_in', expiresIn.toString());
       }
     });
-
-    const token = localStorage.getItem('access_token');
-    console.log(token);
-
-    if (token) {
-      console.log('Already logged in');
-      this.router.navigate(['/top-artists']);
-    } else {
-      console.log('Logging in');
-      this.login();
-    }
-  }
-
-  private login() {
-    const clientId = environment.clientID;
-    const redirectUri = environment.callbackURL;
-    const scope = 'user-read-private user-read-email user-top-read';
-    const responseType = 'token';
-    const state = 'plotifylogin';
-    
-    this.document.location.href = 
-      `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
   }
 }

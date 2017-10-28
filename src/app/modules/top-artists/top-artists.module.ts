@@ -4,11 +4,13 @@ import { ArtistListComponent } from './artist-list/artist-list.component';
 import { TopArtistsComponent } from './top-artists/top-artists.component';
 import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './header/header.component'
+import { AuthServiceModule } from '../auth-service/auth-service.module'
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    AuthServiceModule
   ],
   exports: [
     TopArtistsComponent

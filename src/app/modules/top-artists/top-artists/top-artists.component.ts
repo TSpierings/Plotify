@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TopArtists, Item } from '../../interfaces/artists';
+import { AuthService } from '../../auth-service/auth-service/auth.service'
 
 @Component({
   selector: 'app-top-artists',
@@ -14,14 +15,14 @@ export class TopArtistsComponent implements OnInit {
   private offset: number = 0;
   private timeRange: string = "medium_term"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit() {
     this.getTop();
   }
 
   getTop() {
-    const token = localStorage.getItem('access_token');
+    const token = this.authService.getToken();
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
     const url = 'https://api.spotify.com/v1/me/top/artists';
     let params = new HttpParams().set('offset', this.offset.toString());
