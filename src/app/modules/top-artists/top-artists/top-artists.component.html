@@ -2,4 +2,7 @@
   <app-artist-list class="artist-list" 
     [artists]="topArtists?.items">
   </app-artist-list>
+  <div class="load-more">
+    <span (click)="getTop()">Load more..</span>
+  </div>  
 </div>
