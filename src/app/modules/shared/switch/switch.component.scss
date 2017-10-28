@@ -1,0 +1,20 @@
+@import 'src/app/scss/colors';
+
+.selector {
+    display: flex;
+    background-color: $light;
+    width: fit-content;
+
+    .item {
+        background-color: $light;
+        color: $text-dark;
+        margin: 1px;
+        padding: 0px 5px;
+        cursor: pointer;
+    }
+
+    .selected {
+        background-color: $dark;
+        color: $text-light;
+    }
+}
