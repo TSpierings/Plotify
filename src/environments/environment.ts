@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  clientID: 'a4984ffdc4f140d39634d0e071664ffe',
+  callbackURL: 'http://localhost:4200/'
 };

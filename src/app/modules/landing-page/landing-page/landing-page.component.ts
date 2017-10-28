@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { TopArtists, Item } from '../../interfaces/artists';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-landing-page',
@@ -49,12 +50,12 @@ export class LandingPageComponent implements OnInit {
   }
 
   private login() {
-    const clientId = 'a4984ffdc4f140d39634d0e071664ffe';
-    const redirectUri = 'http://localhost:4200/';
+    const clientId = environment.clientID;
+    const redirectUri = environment.callbackURL;
     const scope = 'user-read-private user-read-email user-top-read';
     const responseType = 'token';
     const state = 'plotifylogin';
-
+    
     this.document.location.href = 
       `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
   }
