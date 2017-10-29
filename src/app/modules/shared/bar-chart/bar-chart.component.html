@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="chart">
+    <div class="bars">
+      <div class="column"
+        *ngFor="let item of items">
+        <div class="label">{{item.key}}</div>
+        <div class="bar"
+          [style.height.px]="160 * item.normalizedValue"></div>
+      </div>
+    </div>
+  </div>
+</div>

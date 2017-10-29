@@ -1,0 +1,45 @@
+@import 'src/app/scss/colors';
+
+.container {
+    display: flex;
+    background-color: $dark;
+    height: 200px;
+
+    .chart {
+        display: flex;
+        overflow-x: scroll;
+
+        .bars {
+            display: flex;
+
+            .column {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                margin: 0px 1px;
+                text-align: center;
+
+                &:first-child {
+                    margin-left: 0px;
+                }
+
+                &:last-child {
+                    margin-right: 0px;
+                }
+
+                .bar {
+                    display: flex;
+                    background-color: $light;
+                    width: 100%;
+                }
+
+                .label {
+                    margin: 1px 3px;
+                    font-size: 12px;
+                    color: $text-light;
+                    height: fit-content;
+                }
+            }
+        }
+    }
+}

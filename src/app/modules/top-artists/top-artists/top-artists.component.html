@@ -2,6 +2,9 @@
   (selectedTimeRangeChanged)="changeTimeRange($event)">
 </app-header>
 <div class="container">
+  <app-bar-chart class="chart"
+    [items]="weightedGenres">
+  </app-bar-chart>
   <app-artist-list class="artist-list" 
     [artists]="topArtists?.items">
   </app-artist-list>

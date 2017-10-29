@@ -5,6 +5,11 @@
     align-items: center;
     flex-direction: column;
     margin-bottom: 5px;
+    background: $light;
+
+    .chart {
+        width: 100%;
+    }
 
     .artist-list {
         margin-top: 5px;
