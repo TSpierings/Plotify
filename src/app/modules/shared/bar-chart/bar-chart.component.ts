@@ -15,7 +15,7 @@ import {
   animations: [
     trigger('barstate', [
       transition('* => *', [
-        query(':enter .bar', style({ height: '0px' })),
+        query(':enter .bar', style({ height: '0px' }), { optional: true }),
         query(':enter .bar', [
           stagger(25, [
             style({ height: '0px' }),
