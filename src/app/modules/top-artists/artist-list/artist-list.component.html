@@ -1,5 +1,6 @@
-<div class="artist-list">
-  <app-artist-card class="card"
+<div class="artist-list"
+  [@cardstate]="artists?.length">
+  <app-artist-card class="card"    
     *ngFor="let artist of artists; let i = index" 
     [artist]="artist"
     [rank]="i+1">
