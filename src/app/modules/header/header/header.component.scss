@@ -64,17 +64,21 @@
 }
 
 .ham-menu {
-    visibility: collapse;
+    visibility: hidden;
     width: calc(100% - 20);
     background-color: $dark;
     color: $light;
     text-align: right;
     height: 0px;
     overflow: hidden;
+    transition-duration: 250ms;
+
+    a {
+        margin: 10px;
+    }
 }
 
 .open {
-    visibility: visible;    
-    padding: 10px;
-    height: auto;
+    visibility: visible;   
+    height: 25px;
 }
