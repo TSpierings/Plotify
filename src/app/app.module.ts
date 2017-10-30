@@ -6,6 +6,7 @@ import { AppRoutingModule } from './modules/routing/routing-module'
 import { LandingPageModule } from './modules/landing-page/landing-page.module'
 import { HeaderModule } from './modules/header/header.module'
 import { TopArtistsModule } from './modules/top-artists/top-artists.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TopArtistsModule } from './modules/top-artists/top-artists.module'
     AppRoutingModule,
     LandingPageModule,
     HeaderModule,
-    TopArtistsModule
+    TopArtistsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
