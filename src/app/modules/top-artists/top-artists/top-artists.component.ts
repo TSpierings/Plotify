@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { TopArtists, Item } from '../../interfaces/artists';
+import { TopArtists, ArtistItem } from '../../interfaces/artists';
 import { AuthService } from '../../auth-service/auth-service/auth.service'
 import { MapItem } from '../../shared/bar-chart/bar-chart.component';
 
@@ -11,11 +11,11 @@ import { MapItem } from '../../shared/bar-chart/bar-chart.component';
 })
 export class TopArtistsComponent implements OnInit {
 
+  private offset = 0;
+  private timeRange = 'medium_term'
+
   topArtists: TopArtists;
   weightedGenres: Array<MapItem>;
-
-  private offset: number = 0;
-  private timeRange: string = "medium_term"
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -42,7 +42,7 @@ export class TopArtistsComponent implements OnInit {
         }
 
         this.topArtists.items.push(...newArtists.items);
-        this.generateGenreList();        
+        this.generateGenreList();
       })
       .catch(error => console.log(error));
   }
@@ -71,7 +71,7 @@ export class TopArtistsComponent implements OnInit {
       index++;
     });
 
-    const maxValue = genres.reduce((a, c) => {return c.value > a ? c.value : a}, 0);
+    const maxValue = genres.reduce((a, c) =>  c.value > a ? c.value : a, 0);
 
     genres.forEach(genre => {
       genre.normalizedValue = genre.value / maxValue;

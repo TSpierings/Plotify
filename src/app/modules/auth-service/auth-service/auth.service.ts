@@ -11,13 +11,13 @@ export class AuthService {
   login() {
     const clientId = environment.clientID;
     const redirectUri = environment.callbackURL;
-    const scope = 'user-read-private user-read-email user-top-read';
+    const scope = 'user-read-private user-read-email user-top-read playlist-read-private';
     const responseType = 'token';
 
     const state = uuid();
     localStorage.setItem('state', state);
-    
-    this.document.location.href = 
+
+    this.document.location.href =
       `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
   }
 
@@ -26,12 +26,12 @@ export class AuthService {
     const expiresIn = localStorage.getItem('expires_in');
 
     if (accessToken == null || expiresIn == null) {
-      console.log("No token stored!");
+      console.log('No token stored!');
       this.login();
     }
 
     if (new Date().getTime() > Number.parseInt(expiresIn)) {
-      console.log("Token expired!");
+      console.log('Token expired!');
       this.login();
     }
 

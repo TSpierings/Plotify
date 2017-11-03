@@ -7,6 +7,7 @@ import { LandingPageModule } from './modules/landing-page/landing-page.module'
 import { HeaderModule } from './modules/header/header.module'
 import { TopArtistsModule } from './modules/top-artists/top-artists.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlaylistsModule } from './modules/playlists/playlists.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LandingPageModule,
     HeaderModule,
     TopArtistsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PlaylistsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

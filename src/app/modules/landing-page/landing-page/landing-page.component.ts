@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { TopArtists, Item } from '../../interfaces/artists';
+import { TopArtists, ArtistItem } from '../../interfaces/artists';
 import { AuthService } from '../../auth-service/auth-service/auth.service'
 
 @Component({

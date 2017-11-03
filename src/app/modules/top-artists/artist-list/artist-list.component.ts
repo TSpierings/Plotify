@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item }  from '../../interfaces/artists'
+import { ArtistItem }  from '../../interfaces/artists'
 import {
   trigger,
   style,
@@ -33,7 +33,7 @@ import {
 })
 export class ArtistListComponent implements OnInit {
 
-  @Input() artists: Array<Item>;
+  @Input() artists: Array<ArtistItem>;
 
   constructor() { }
 

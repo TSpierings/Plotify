@@ -1,19 +1,11 @@
-export interface ExternalUrls {
-    spotify: string;
-}
+import { ExternalUrls, Image } from './common';
 
 export interface Followers {
     href?: any;
     total: number;
 }
 
-export interface Image {
-    height: number;
-    url: string;
-    width: number;
-}
-
-export interface Item {
+export interface ArtistItem {
     external_urls: ExternalUrls;
     followers: Followers;
     genres: string[];
@@ -27,7 +19,7 @@ export interface Item {
 }
 
 export interface TopArtists {
-    items: Item[];
+    items: ArtistItem[];
     total: number;
     limit: number;
     offset: number;

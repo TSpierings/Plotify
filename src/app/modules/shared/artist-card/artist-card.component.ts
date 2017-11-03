@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from '../../interfaces/artists';
+import { ArtistItem } from '../../interfaces/artists';
 
 @Component({
   selector: 'app-artist-card',
@@ -8,7 +8,7 @@ import { Item } from '../../interfaces/artists';
 })
 export class ArtistCardComponent implements OnInit {
 
-  @Input() artist: Item;
+  @Input() artist: ArtistItem;
   @Input() rank: Number;
 
   constructor() { }
