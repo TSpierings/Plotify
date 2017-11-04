@@ -1,3 +1,7 @@
-<div *ngFor="let playlist of playlists">
-  {{playlist.name}} - {{playlist.fullTracks?.length}} - {{uAlbums.get(playlist.name)}}
+<div class="container">
+  <div class="playlist-card" *ngFor="let playlist of playlists">
+    <img width="200px" height="200px" [src]="playlist.images[playlist.images.length - 1].url"/>
+    <span class="name">{{playlist.name}}</span>
+    <span class="tracks">{{playlist.tracks.total}} tracks</span>
+  </div>
 </div>

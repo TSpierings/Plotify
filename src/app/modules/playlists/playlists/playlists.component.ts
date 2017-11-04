@@ -47,7 +47,7 @@ export class PlaylistsComponent implements OnInit {
 
         const response = data as PlaylistRootObject;
 
-        response.items.forEach(playlist => this.getTracksFromPlaylist(playlist, 0));
+        // response.items.forEach(playlist => this.getTracksFromPlaylist(playlist, 0));
 
         if (this.playlists == null) {
           this.playlists = response.items;
