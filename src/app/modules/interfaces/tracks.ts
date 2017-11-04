@@ -58,6 +58,9 @@ export interface TrackItem {
     added_by: AddedBy;
     is_local: boolean;
     track: Track;
+
+    // Custom properties
+    audioFeatures?: AudioFeatures
 }
 
 export interface TrackRootObject {
@@ -68,4 +71,29 @@ export interface TrackRootObject {
     offset: number;
     previous?: any;
     total: number;
+}
+
+export interface AudioFeaturesRootObject {
+    audio_features: Array<AudioFeatures>;
+}
+
+export interface AudioFeatures {
+    danceability: number;
+    energy: number;
+    key: number;
+    loudness: number;
+    mode: number;
+    speechiness: number;
+    acousticness: number;
+    instrumentalness: number;
+    liveness: number;
+    valence: number;
+    tempo: number;
+    type: string;
+    id: string;
+    uri: string;
+    track_href: string;
+    analysis_url: string;
+    duration_ms: number;
+    time_signature: number;
 }

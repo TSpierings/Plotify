@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { PlaylistItem, PlaylistRootObject } from '../../interfaces/playlists';
-import { TrackRootObject, TrackItem, Album } from '../../interfaces/tracks';
+import { TrackRootObject, TrackItem, Album, AudioFeaturesRootObject } from '../../interfaces/tracks';
 import { AuthService } from '../../auth-service/auth-service/auth.service'
 
 @Component({
@@ -25,6 +25,7 @@ export class PlaylistsComponent implements OnInit {
 
   openPlaylist(playlist: PlaylistItem) {
     if (this.selectedPlaylist !== playlist) {
+      console.log('y');
       this.selectedPlaylist = playlist;
       this.getTracksForPlaylist(this.selectedPlaylist, 0);
     }
@@ -70,6 +71,7 @@ export class PlaylistsComponent implements OnInit {
     const token = this.authService.getToken();
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
     const params = new HttpParams().set('offset', offset.toString());
+    console.log('a');
 
     this.http.get(playlist.tracks.href, { headers: header, params: params }).toPromise()
       .then(data => {
@@ -84,9 +86,30 @@ export class PlaylistsComponent implements OnInit {
         if (playlist.fullTracks.length < playlist.tracks.total) {
           this.getTracksForPlaylist(playlist, offset + 100);
         } else {
-          this.uAlbums.set(playlist.name, this.getUniqueAlbums(playlist));
+          this.getAudioFeatures(playlist.fullTracks);
         }
       })
       .catch(error => console.log(error));
   }
+
+  getAudioFeatures(tracks: Array<TrackItem>) {
+    for (let index = 0; index < tracks.length; index += 100) {
+      const token = this.authService.getToken();
+      const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
+      const url = 'https://api.spotify.com/v1/audio-features';
+
+      const trackString = tracks.map(track => track.track.id).slice(index, index + 100).join(',');
+      console.log(trackString);
+
+      const params = new HttpParams().set('ids', trackString);
+
+      this.http.get(url, { headers: header, params: params}).toPromise()
+        .then(data => {
+          const response = data as AudioFeaturesRootObject;
+          response.audio_features.forEach(feature => tracks.find(track => track.track.id === feature.id).audioFeatures = feature);
+        })
+        .catch(error => console.log(error));
+    }
+  }
+
 }

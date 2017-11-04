@@ -1,8 +1,9 @@
 <div class="container">
   <div class="playlist-card" 
     *ngFor="let playlist of playlists"
-    (click)="openPlaylist(playlist)">
-    <img width="200px" height="200px" [src]="playlist.images[playlist.images.length - 1].url"/>
+    (click)="openPlaylist(playlist)"
+    [ngClass]="{'selected': selectedPlaylist === playlist}">
+    <img width="150px" height="150px" [src]="playlist.images[playlist.images.length - 1].url"/>
     <span class="name">{{playlist.name}}</span>
     <span class="tracks">{{playlist.tracks.total}} tracks</span>
   </div>
@@ -12,8 +13,8 @@
     <span>Select a playlist!</span>
   </div>
   <div class="track-list" *ngIf="selectedPlaylist != null">
-    <div class="track-card" *ngFor="let track of selectedPlaylist.fullTracks">
-      <span>{{track.name}}</span>
+    <div class="track-card" *ngFor="let trackItem of selectedPlaylist.fullTracks">
+      <span>{{trackItem.track.name}} - {{trackItem.audioFeatures?.danceability}}</span>
     </div>
   </div>
 </div>
