@@ -1,7 +1,19 @@
 <div class="container">
-  <div class="playlist-card" *ngFor="let playlist of playlists">
+  <div class="playlist-card" 
+    *ngFor="let playlist of playlists"
+    (click)="openPlaylist(playlist)">
     <img width="200px" height="200px" [src]="playlist.images[playlist.images.length - 1].url"/>
     <span class="name">{{playlist.name}}</span>
     <span class="tracks">{{playlist.tracks.total}} tracks</span>
+  </div>
+</div>
+<div class="track-container">
+  <div class="placholder" *ngIf="selectedPlaylist == null">
+    <span>Select a playlist!</span>
+  </div>
+  <div class="track-list" *ngIf="selectedPlaylist != null">
+    <div class="track-card" *ngFor="let track of selectedPlaylist.fullTracks">
+      <span>{{track.name}}</span>
+    </div>
   </div>
 </div>

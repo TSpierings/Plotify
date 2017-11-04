@@ -1,4 +1,6 @@
-html{
+@import 'src/app/scss/colors';
+
+html {
     width: 100%;
     height: 100%;
 
@@ -7,6 +9,7 @@ html{
         height: 100%;
         width: 100%;
         font-family: sans-serif;
+        background-color: $light;
 
         &.no-scroll {
             overflow: hidden;

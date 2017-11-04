@@ -4,7 +4,9 @@
     display: flex;
     background-color: $dark;
     overflow-x: scroll;
+    overflow-y: hidden;
     border-top: 1px solid $light;
+    height: 225px;
 
     .playlist-card {
         display: flex;
@@ -13,7 +15,8 @@
         background-color: $light;
         color: $text-dark;
         text-align: center;
-        
+        transition-duration: 250ms;
+
         .name {
             display: flex;
             flex-grow: 1;
@@ -26,6 +29,27 @@
             text-align: right;
             font-size: 12px;
             margin-right: 2px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            transform: translateY(5px);
+        }
+    }
+}
+
+.track-container {
+
+    .placholder {
+        height: calc(100vh - 284px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .track-list {
+        .track-card {
+
         }
     }
 }

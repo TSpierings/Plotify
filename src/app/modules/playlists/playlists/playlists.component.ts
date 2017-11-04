@@ -15,11 +15,19 @@ export class PlaylistsComponent implements OnInit {
 
   playlists: Array<PlaylistItem>;
   uAlbums = new Map<string, number>();
+  selectedPlaylist: PlaylistItem;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit() {
     this.getPlaylists();
+  }
+
+  openPlaylist(playlist: PlaylistItem) {
+    if (this.selectedPlaylist !== playlist) {
+      this.selectedPlaylist = playlist;
+      this.getTracksForPlaylist(this.selectedPlaylist, 0);
+    }
   }
 
   getUniqueAlbums(playlist: PlaylistItem): number {
@@ -38,8 +46,7 @@ export class PlaylistsComponent implements OnInit {
     const token = this.authService.getToken();
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
     const url = 'https://api.spotify.com/v1/me/playlists';
-    let params = new HttpParams().set('offset', this.offset.toString());
-    // params = params.set('limit', '1');
+    const params = new HttpParams().set('offset', this.offset.toString());
 
     this.http.get(url, { headers: header, params: params}).toPromise()
       .then(data => {
@@ -59,7 +66,7 @@ export class PlaylistsComponent implements OnInit {
       .catch(error => console.log(error));
   }
 
-  getTracksFromPlaylist(playlist: PlaylistItem, offset: number) {
+  getTracksForPlaylist(playlist: PlaylistItem, offset: number) {
     const token = this.authService.getToken();
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
     const params = new HttpParams().set('offset', offset.toString());
@@ -75,7 +82,7 @@ export class PlaylistsComponent implements OnInit {
         playlist.fullTracks.push(...response.items);
 
         if (playlist.fullTracks.length < playlist.tracks.total) {
-          this.getTracksFromPlaylist(playlist, offset + 100);
+          this.getTracksForPlaylist(playlist, offset + 100);
         } else {
           this.uAlbums.set(playlist.name, this.getUniqueAlbums(playlist));
         }
