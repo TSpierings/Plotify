@@ -1,6 +1,6 @@
 <div class="artist-card">
   <div class="top">
-    <img width="64" height="64" [src]="artist.images[2].url"/>
+    <img width="64" height="64" src="{{artist.images | imageSize: 64}}"/>
     <div class="data">
       <span>{{artist.name}}</span>
       <span>Popularity: {{artist.popularity}}</span>

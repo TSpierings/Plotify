@@ -5,8 +5,8 @@
   </div>
   <div class="menu">
     <div class="item"><a (click)="router.navigate(['/top-artists'])">Your top artists</a></div>
-    <!-- <div class="item">Your library</div> -->
     <div class="item"><a (click)="router.navigate(['/playlists'])">Your playlists</a></div>    
+    <!-- <div class="item">Your library</div> -->    
   </div>  
   <div class="hamburger hampart" (click)="open=!open">
     <div class="stripes hampart"></div>
@@ -14,6 +14,6 @@
 </div>
 <div [ngClass]="{'open': open}" class="ham-menu">
   <a (click)="router.navigate(['/top-artists'])">Your top artists</a>
-  <!-- <div class="ham-item">Your library</div> -->
-  <div class="ham-item"><a (click)="router.navigate(['/playlists'])">Your playlists</a></div>    
+  <a (click)="router.navigate(['/playlists'])">Your playlists</a>
+  <!-- <div class="ham-item">Your library</div> -->  
 </div>
