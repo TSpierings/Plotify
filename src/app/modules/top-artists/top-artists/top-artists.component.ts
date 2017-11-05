@@ -56,17 +56,18 @@ export class TopArtistsComponent implements OnInit {
 
   generateGenreList() {
     let genres = new Array<MapItem>();
-    let index = 0;
+    let index = 1;
 
     this.topArtists.items.forEach(element => {
       element.genres.forEach(genre => {
         const item = genres.find(x => x.key === genre);
+        const value = Math.pow(index, -0.5);
 
         if (item) {
-          item.value += (20 + this.offset - index);
+          item.value += value;
+        } else {
+          genres.push({key: genre, value: value, normalizedValue: 0});
         }
-
-        genres.push({key: genre, value: 20 - index, normalizedValue: 0});
       });
       index++;
     });
