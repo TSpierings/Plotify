@@ -74,11 +74,12 @@
     transition-duration: 250ms;
 
     a {
-        margin: 10px;
+        margin-right: 10px;
+        line-height: 30px;
     }
 }
 
 .open {
     visibility: visible;   
-    height: 40px;
+    height: 60px;
 }
