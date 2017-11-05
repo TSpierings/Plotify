@@ -106,6 +106,10 @@
         @media (max-width: 600px) {
             .track-card {
                 flex-direction: column;
+                
+                .track-info {
+                    width: unset;
+                }
 
                 .audio-features {
                     border: none;

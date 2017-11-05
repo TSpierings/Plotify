@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class FeatureImageComponent implements OnInit {
 
   @Input() feature: number;
+  @Input() label: string;
 
   constructor() { }
 

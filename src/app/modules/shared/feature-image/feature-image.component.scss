@@ -5,11 +5,11 @@
         fill: $light;
     }
 
+    text {
+        fill: $text-light
+    }
+
     .center {
         fill: $text-dark;
-    }   
-    
-    .bottom {
-        fill: $text-light;
     }
 }
