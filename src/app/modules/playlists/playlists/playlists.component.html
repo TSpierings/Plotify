@@ -3,7 +3,7 @@
     *ngFor="let playlist of playlists"
     (click)="openPlaylist(playlist)"
     [ngClass]="{'selected': selectedPlaylist === playlist}">
-    <img width="150px" height="150px" [src]="playlist.images[playlist.images.length - 1].url"/>
+    <img width="150px" height="150px" src="{{playlist.images | imageSize: 150}}"/>
     <span class="name">{{playlist.name}}</span>
     <span class="tracks">{{playlist.tracks.total}} tracks</span>
   </div>
