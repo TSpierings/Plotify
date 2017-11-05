@@ -27,3 +27,7 @@ export interface TopArtists {
     href: string;
     next: string;
 }
+
+export interface ArtistRootObject {
+    artists: Array<ArtistItem>;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TopArtists, ArtistItem } from '../../interfaces/artists';
-import { AuthService } from '../../auth-service/auth-service/auth.service'
+import { AuthService } from '../../auth-service/auth-service/auth.service';
 import { MapItem } from '../../shared/bar-chart/bar-chart.component';
 
 @Component({
