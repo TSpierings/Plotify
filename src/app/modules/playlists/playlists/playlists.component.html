@@ -14,7 +14,16 @@
   </div>
   <div class="track-list" *ngIf="selectedPlaylist != null">
     <div class="track-card" *ngFor="let trackItem of selectedPlaylist.fullTracks">
-      <span>{{trackItem.track.name}} - {{trackItem.audioFeatures?.danceability}}</span>
+      <div class="track-info">
+        <span class="title">{{trackItem.track.name}}</span>
+        <div class="bottom-row">
+          <span class="artist-names">{{getArtistNameString(trackItem.track.artists)}}</span>
+          <span>{{trackItem.track.album.name}}</span>
+        </div>        
+      </div>
+      <div class="audio-features" *ngIf="trackItem.audioFeatures">
+        <span>{{trackItem.audioFeatures.danceability}}</span>
+      </div>
     </div>
   </div>
 </div>

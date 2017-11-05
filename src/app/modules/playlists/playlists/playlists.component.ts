@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { PlaylistItem, PlaylistRootObject } from '../../interfaces/playlists';
-import { TrackRootObject, TrackItem, Album, AudioFeaturesRootObject } from '../../interfaces/tracks';
+import { TrackRootObject, TrackItem, Album, AudioFeaturesRootObject, Artist } from '../../interfaces/tracks';
 import { AuthService } from '../../auth-service/auth-service/auth.service'
 
 @Component({
@@ -25,9 +25,10 @@ export class PlaylistsComponent implements OnInit {
 
   openPlaylist(playlist: PlaylistItem) {
     if (this.selectedPlaylist !== playlist) {
-      console.log('y');
       this.selectedPlaylist = playlist;
-      this.getTracksForPlaylist(this.selectedPlaylist, 0);
+      if (playlist.fullTracks == null) {
+        this.getTracksForPlaylist(this.selectedPlaylist, 0);
+      }      
     }
   }
 
@@ -55,8 +56,6 @@ export class PlaylistsComponent implements OnInit {
 
         const response = data as PlaylistRootObject;
 
-        // response.items.forEach(playlist => this.getTracksFromPlaylist(playlist, 0));
-
         if (this.playlists == null) {
           this.playlists = response.items;
           return;
@@ -71,7 +70,6 @@ export class PlaylistsComponent implements OnInit {
     const token = this.authService.getToken();
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
     const params = new HttpParams().set('offset', offset.toString());
-    console.log('a');
 
     this.http.get(playlist.tracks.href, { headers: header, params: params }).toPromise()
       .then(data => {
@@ -99,7 +97,6 @@ export class PlaylistsComponent implements OnInit {
       const url = 'https://api.spotify.com/v1/audio-features';
 
       const trackString = tracks.map(track => track.track.id).slice(index, index + 100).join(',');
-      console.log(trackString);
 
       const params = new HttpParams().set('ids', trackString);
 
@@ -110,6 +107,10 @@ export class PlaylistsComponent implements OnInit {
         })
         .catch(error => console.log(error));
     }
+  }
+
+  getArtistNameString(artists: Array<Artist>): string {
+    return artists.map(artist => artist.name).join(', ');
   }
 
 }

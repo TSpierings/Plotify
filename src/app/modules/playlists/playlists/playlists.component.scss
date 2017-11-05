@@ -45,7 +45,7 @@
 .track-container {
 
     .placholder {
-        height: calc(100vh - 284px);
+        height: calc(100vh - 286px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -53,7 +53,44 @@
 
     .track-list {
         .track-card {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px;
+            background-color: $dark;
+            color: $text-light;
 
+            .track-info {
+                display: flex;
+                flex-direction: column;
+                padding: 5px;
+
+                .title {
+                    margin-bottom: 10px;
+                }
+
+                .bottom-row {
+                    display: flex;
+                    font-size: 12px;
+
+                    span {
+                        width: 300px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                }                
+            }
+
+            .audio-features {
+                display: flex;
+                align-items: center;
+                border-left: 1px solid $light;
+                padding: 2px;
+
+                span {
+                    width: 40px;
+                }
+            }
         }
     }
 }
