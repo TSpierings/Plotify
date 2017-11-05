@@ -10,9 +10,6 @@ import { AuthService } from '../../auth-service/auth-service/auth.service'
   styleUrls: ['./playlists.component.scss']
 })
 export class PlaylistsComponent implements OnInit {
-
-  private offset = 0;
-
   playlists: Array<PlaylistItem>;
   uAlbums = new Map<string, number>();
   selectedPlaylist: PlaylistItem;
@@ -20,7 +17,7 @@ export class PlaylistsComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit() {
-    this.getPlaylists();
+    this.getPlaylists(0);
   }
 
   openPlaylist(playlist: PlaylistItem) {
@@ -32,36 +29,27 @@ export class PlaylistsComponent implements OnInit {
     }
   }
 
-  getUniqueAlbums(playlist: PlaylistItem): number {
-    const albums = playlist.fullTracks.map(track => track.track.album);
-    const uniqueAlbums = new Array<Album>();
-    albums.forEach(album => {
-      if (uniqueAlbums.findIndex(i => i.name === album.name) === -1) {
-        uniqueAlbums.push(album);
-      }
-    });
-
-    return uniqueAlbums.length;
-  }
-
-  getPlaylists() {
+  getPlaylists(offset: number) {
     const token = this.authService.getToken();
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
     const url = 'https://api.spotify.com/v1/me/playlists';
-    const params = new HttpParams().set('offset', this.offset.toString());
+    let params = new HttpParams().set('offset', offset.toString());
+    params = params.set('limit', '50');
 
     this.http.get(url, { headers: header, params: params}).toPromise()
       .then(data => {
-        this.offset += 20;
 
         const response = data as PlaylistRootObject;
 
         if (this.playlists == null) {
           this.playlists = response.items;
-          return;
-        }
+        } else {
+          this.playlists.push(...response.items);
+        }        
 
-        this.playlists.push(...response.items);
+        if (response.offset + response.limit < response.total) {
+          this.getPlaylists(offset + response.limit);
+        }
       })
       .catch(error => console.log(error));
   }
