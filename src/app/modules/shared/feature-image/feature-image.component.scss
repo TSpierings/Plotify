@@ -1,0 +1,15 @@
+@import 'src/app/scss/colors';
+
+.feature-image {
+    circle {
+        fill: $light;
+    }
+
+    .center {
+        fill: $text-dark;
+    }   
+    
+    .bottom {
+        fill: $text-light;
+    }
+}

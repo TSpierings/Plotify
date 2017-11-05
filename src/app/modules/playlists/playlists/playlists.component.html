@@ -22,7 +22,12 @@
         </div>        
       </div>
       <div class="audio-features" *ngIf="trackItem.audioFeatures">
-        <span>{{trackItem.audioFeatures.danceability}}</span>
+        <app-feature-image [feature]="trackItem.audioFeatures.danceability"></app-feature-image>
+        <app-feature-image [feature]="trackItem.audioFeatures.energy"></app-feature-image>
+        <app-feature-image [feature]="trackItem.audioFeatures.speechiness"></app-feature-image>
+        <app-feature-image [feature]="trackItem.audioFeatures.acousticness"></app-feature-image>
+        <app-feature-image [feature]="trackItem.audioFeatures.instrumentalness"></app-feature-image>
+        <app-feature-image [feature]="trackItem.audioFeatures.liveness"></app-feature-image>
       </div>
     </div>
   </div>

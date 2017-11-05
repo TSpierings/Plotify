@@ -43,6 +43,9 @@
 }
 
 .track-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .placholder {
         height: calc(100vh - 286px);
@@ -51,7 +54,11 @@
         justify-content: center;
     }
 
-    .track-list {
+    .track-list {     
+        margin-top: 5px;   
+        max-width: 1010px;
+        width: 100%;
+
         .track-card {
             display: flex;
             justify-content: space-between;
@@ -66,6 +73,10 @@
 
                 .title {
                     margin-bottom: 10px;
+                    width: 600px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
 
                 .bottom-row {
@@ -87,9 +98,7 @@
                 border-left: 1px solid $light;
                 padding: 2px;
 
-                span {
-                    width: 40px;
-                }
+                
             }
         }
     }
