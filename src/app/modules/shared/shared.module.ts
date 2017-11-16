@@ -5,6 +5,7 @@ import { SwitchComponent } from './switch/switch.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { FeatureImageComponent } from './feature-image/feature-image.component';
 import { ImageSizePipe } from './pipes/image-size-pipe'
+import { PitchClassPipe } from './pipes/pitch-class-pipe'
 
 @NgModule({
   imports: [
@@ -15,14 +16,16 @@ import { ImageSizePipe } from './pipes/image-size-pipe'
     SwitchComponent,
     BarChartComponent,
     FeatureImageComponent,
-    ImageSizePipe
+    ImageSizePipe,
+    PitchClassPipe
   ],
   declarations: [
     ArtistCardComponent,
     SwitchComponent,
     BarChartComponent,
     FeatureImageComponent,
-    ImageSizePipe
+    ImageSizePipe,
+    PitchClassPipe
   ]
 })
 export class SharedModule { }
