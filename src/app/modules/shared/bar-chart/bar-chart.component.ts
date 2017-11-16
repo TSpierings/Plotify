@@ -29,6 +29,7 @@ import {
 export class BarChartComponent implements OnInit {
 
   @Input() items: Array<MapItem>;
+  @Input() reversed = false;
 
   constructor() { }
 

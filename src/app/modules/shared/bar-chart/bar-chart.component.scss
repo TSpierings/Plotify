@@ -44,3 +44,17 @@
         }
     }
 }
+
+.reversed {
+    background-color: $light;
+
+    .chart .bars .column {
+        .label {
+            color: $text-dark;
+        }
+
+        .bar {
+            background-color: $dark;
+        }
+    }
+}

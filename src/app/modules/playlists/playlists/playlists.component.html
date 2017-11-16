@@ -8,9 +8,16 @@
     <span class="tracks">{{playlist.tracks.total}} tracks</span>
   </div>
 </div>
-<app-bar-chart class="chart"
-  [items]="weightedGenres">
-</app-bar-chart>
+
+<div class="details-container">
+  <div class="playlist-details">
+      <app-bar-chart
+        [reversed]="true"
+        [items]="weightedGenres">
+      </app-bar-chart>
+    </div>
+</div>
+
 <div class="track-container">
   <div class="placholder" *ngIf="selectedPlaylist == null">
     <span>Select a playlist!</span>

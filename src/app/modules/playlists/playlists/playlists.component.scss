@@ -50,6 +50,17 @@
     }
 }
 
+.details-container {
+    display: flex;
+    justify-content: center;
+
+    .playlist-details {
+        width: 100%;
+        max-width: 1010px;
+    }
+}
+
+
 .track-container {
     display: flex;
     flex-direction: column;

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngClass]="{'reversed': reversed}">
   <div class="chart">
     <div class="bars" [@barstate]="items?.length">
       <div class="column"          
