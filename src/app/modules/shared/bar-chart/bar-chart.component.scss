@@ -4,7 +4,8 @@
     display: flex;
     background-color: $dark;
     height: 200px;
-
+    width: 100%;
+    
     .chart {
         display: flex;
         overflow-x: scroll;
