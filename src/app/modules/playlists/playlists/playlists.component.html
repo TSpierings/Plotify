@@ -18,7 +18,10 @@
   <div class="track-list" *ngIf="selectedPlaylist != null">
     <div class="track-card" *ngFor="let trackItem of selectedPlaylist.fullTracks">
       <div class="track-info">
-        <span class="title">{{trackItem.track.name}}</span>
+        <div class="top-row">
+          <span class="title">{{trackItem.track.name}}</span>
+          <span class="tempo">{{trackItem.audioFeatures?.tempo | number: '3.0-0'}} bpm</span>
+        </div>
         <div class="bottom-row">
           <span class="artist-names">{{getArtistNameString(trackItem.track.artists)}}</span>
           <span>{{trackItem.track.album.name}}</span>
@@ -31,6 +34,7 @@
         <app-feature-image [feature]="trackItem.audioFeatures.acousticness" [label]="'acoustic'"></app-feature-image>
         <app-feature-image [feature]="trackItem.audioFeatures.instrumentalness" [label]="'instrumental'"></app-feature-image>
         <app-feature-image [feature]="trackItem.audioFeatures.liveness" [label]="'live'"></app-feature-image>
+        <app-feature-image [feature]="trackItem.audioFeatures.valence" [label]="'valence'"></app-feature-image>
       </div>
     </div>
   </div>

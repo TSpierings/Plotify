@@ -81,13 +81,23 @@
                 flex-grow: 1;
                 width: 225px;
 
-                .title {
-                    margin-bottom: 10px;
-                    max-width: 100%;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                }
+                .top-row {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .title {
+                        margin-bottom: 10px;
+                        max-width: 100%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+
+                    .tempo {
+                        height: fit-content;
+                        font-size: 12px;
+                    }
+                }                
 
                 .bottom-row {
                     display: flex;
@@ -108,12 +118,11 @@
                 align-items: center;
                 border-left: 1px solid $light;
                 padding: 2px;
-                width: 351px;
+                width: 401px;
 
                 app-feature-image {
                     width: 16.6%;
                     max-width: 60px;
-                    height: 50px;
                 }
             }
         }
