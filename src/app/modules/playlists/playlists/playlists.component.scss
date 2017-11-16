@@ -55,8 +55,30 @@
     justify-content: center;
 
     .playlist-details {
+        display: flex;
         width: 100%;
-        max-width: 1010px;
+        max-width: 1000px;        
+
+        .bar-chart {
+            width: 100%;
+            max-width: 594px;
+        }        
+
+        .feature-info {
+            display: flex;
+            align-self: flex-end;
+            border-left: 1px solid $light;
+            padding: 2px;
+            margin-bottom: 17px;
+            width: 401px;
+            background-color: $dark;
+            height: fit-content;
+
+            app-feature-image {
+                width: 16.6%;
+                max-width: 60px;
+            }
+        }
     }
 }
 

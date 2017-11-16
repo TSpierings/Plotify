@@ -9,6 +9,7 @@ export class FeatureImageComponent implements OnInit {
 
   @Input() feature: number;
   @Input() label: string;
+  @Input() reversed = false;
 
   constructor() { }
 

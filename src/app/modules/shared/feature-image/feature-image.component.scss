@@ -13,3 +13,17 @@
         fill: $text-dark;
     }
 }
+
+.reversed {
+    circle {
+        fill: $dark;
+    }
+
+    text {
+        fill: $text-dark
+    }
+
+    .center {
+        fill: $text-light;
+    }
+}

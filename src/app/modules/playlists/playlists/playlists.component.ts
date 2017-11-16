@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { PlaylistItem, PlaylistRootObject } from '../../interfaces/playlists';
-import { TrackRootObject, TrackItem, Album, AudioFeaturesRootObject, Artist } from '../../interfaces/tracks';
+import { TrackRootObject, TrackItem, Album, AudioFeaturesRootObject, Artist, AudioFeatures } from '../../interfaces/tracks';
 import { AuthService } from '../../auth-service/auth-service/auth.service';
 import { ArtistItem, ArtistRootObject} from '../../interfaces/artists';
 import { MapItem } from '../../shared/bar-chart/bar-chart.component';
@@ -17,6 +17,7 @@ export class PlaylistsComponent implements OnInit {
   selectedPlaylist: PlaylistItem;
   allArtists: Array<ArtistItem> = [];
   weightedGenres: Array<MapItem>;
+  avaragedFeatures: AudioFeatures;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -99,6 +100,10 @@ export class PlaylistsComponent implements OnInit {
         .then(data => {
           const response = data as AudioFeaturesRootObject;
           response.audio_features.forEach(feature => tracks.find(track => track.track.id === feature.id).audioFeatures = feature);
+
+          if (index + 100 >= tracks.length) {
+            this.calculateFeatureInfo();
+          }
         })
         .catch(error => console.log(error));
     }
@@ -163,6 +168,38 @@ export class PlaylistsComponent implements OnInit {
 
   getArtistNameString(artists: Array<Artist>): string {
     return artists.map(artist => artist.name).join(', ');
+  }
+
+  calculateFeatureInfo() {
+    this.avaragedFeatures = <AudioFeatures>{};
+
+    this.avaragedFeatures.danceability = this.selectedPlaylist.fullTracks
+      .map(track => track.audioFeatures.danceability)
+      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
+
+    this.avaragedFeatures.energy = this.selectedPlaylist.fullTracks
+      .map(track => track.audioFeatures.energy)
+      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
+
+    this.avaragedFeatures.speechiness = this.selectedPlaylist.fullTracks
+      .map(track => track.audioFeatures.speechiness)
+      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
+
+    this.avaragedFeatures.acousticness = this.selectedPlaylist.fullTracks
+      .map(track => track.audioFeatures.acousticness)
+      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
+
+    this.avaragedFeatures.instrumentalness = this.selectedPlaylist.fullTracks
+      .map(track => track.audioFeatures.instrumentalness)
+      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
+
+    this.avaragedFeatures.liveness = this.selectedPlaylist.fullTracks
+      .map(track => track.audioFeatures.liveness)
+      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
+
+    this.avaragedFeatures.valence = this.selectedPlaylist.fullTracks
+      .map(track => track.audioFeatures.valence)
+      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
   }
 
 }
