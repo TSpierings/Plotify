@@ -64,6 +64,9 @@
 }
 
 .ham-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     visibility: hidden;
     width: calc(100% - 20);
     background-color: $dark;
