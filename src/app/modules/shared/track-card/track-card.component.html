@@ -1,0 +1,21 @@
+<div class="track-card">
+    <div class="track-info">
+      <div class="top-row">
+        <span class="title">{{track.track.name}}</span>
+        <span class="tempo">{{track.audioFeatures?.key | pitchClass}} - {{track.audioFeatures?.tempo | number: '1.0-0'}} bpm</span>
+      </div>
+      <div class="bottom-row">
+        <span class="artist-names">{{getArtistNameString(track.track.artists)}}</span>
+        <span>{{track.track.album.name}}</span>
+      </div>        
+    </div>
+    <div class="audio-features" *ngIf="track.audioFeatures">
+      <app-feature-image [feature]="track.audioFeatures.danceability" [label]="'dance'"></app-feature-image>
+      <app-feature-image [feature]="track.audioFeatures.energy" [label]="'energy'"></app-feature-image>
+      <app-feature-image [feature]="track.audioFeatures.speechiness" [label]="'speech'"></app-feature-image>
+      <app-feature-image [feature]="track.audioFeatures.acousticness" [label]="'acoustic'"></app-feature-image>
+      <app-feature-image [feature]="track.audioFeatures.instrumentalness" [label]="'instrumental'"></app-feature-image>
+      <app-feature-image [feature]="track.audioFeatures.liveness" [label]="'live'"></app-feature-image>
+      <app-feature-image [feature]="track.audioFeatures.valence" [label]="'valence'"></app-feature-image>
+    </div>
+  </div>

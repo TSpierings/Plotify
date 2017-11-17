@@ -40,8 +40,4 @@ export class TrackListComponent implements OnInit {
   ngOnInit() {
   }
 
-  getArtistNameString(artists: Array<Artist>): string {
-    return artists.map(artist => artist.name).join(', ');
-  }
-
 }
