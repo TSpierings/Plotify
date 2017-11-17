@@ -4,7 +4,7 @@
   </div>
   <div class="track-list" *ngIf="tracks != null" [@trackstate]="tracks?.length">
     <div class="track-card" *ngFor="let track of tracks">
-      <app-track-card  [track]="track"></app-track-card>
+      <app-track-card [track]="track"></app-track-card>
     </div>    
   </div>
 </div>

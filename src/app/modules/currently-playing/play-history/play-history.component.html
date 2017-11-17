@@ -1,0 +1,8 @@
+<div class="container">
+  <span>Previously played:</span>
+  <div class="track-list" *ngIf="historyItems != null" [@trackstate]="historyItems?.length">
+    <div class="track-card" *ngFor="let item of historyItems">
+      <app-track-card [track]="item.track"></app-track-card>
+    </div>    
+  </div>
+</div>

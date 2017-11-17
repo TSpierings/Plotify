@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CurrentlyPlayingComponent } from './currently-playing/currently-playing.component';
 import { SharedModule } from '../shared/shared.module';
+import { PlayHistoryComponent } from './play-history/play-history.component';
 
 @NgModule({
   imports: [
@@ -9,7 +10,8 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ],
   declarations: [
-    CurrentlyPlayingComponent
+    CurrentlyPlayingComponent,
+    PlayHistoryComponent
   ],
   exports: [
     CurrentlyPlayingComponent

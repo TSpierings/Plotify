@@ -2,8 +2,7 @@
 
 .track-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
 
     .placholder {
         height: calc(100vh - 286px);

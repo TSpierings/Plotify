@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .track-list {     
+        margin-top: 5px;   
+        max-width: 1010px;
+        width: 100%;
+    }
+}
