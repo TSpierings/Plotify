@@ -1,5 +1,5 @@
 <app-playlist-carousel (selectPlaylist)="openPlaylist($event)"></app-playlist-carousel>
-<app-playlist-details *ngIf="selectedPlaylist != null"
+<app-playlist-details *ngIf="tracksInPlaylist?.length > 0"
   [tracks]="tracksInPlaylist"
   [allArtists]="allArtists"></app-playlist-details>
 <app-track-list [tracks]="tracksInPlaylist"></app-track-list>

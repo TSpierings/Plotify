@@ -24,6 +24,7 @@ export class PlaylistsComponent implements OnInit {
 
   openPlaylist(playlist: PlaylistItem) {
     this.selectedPlaylist = playlist;
+    this.tracksInPlaylist = [];
 
     if (playlist.fullTracks == null) {
       this.getTracksForPlaylist(this.selectedPlaylist, 0);
@@ -83,7 +84,7 @@ export class PlaylistsComponent implements OnInit {
   getArtists(tracks: Array<TrackItem>) {
     const newAllArtists = this.allArtists;
     // Flatten to array of artist id's
-    const artistIds = tracks.map(track => track.track.artists.map(artist => artist.id)).reduce((a, c) => a.concat(c));
+    const artistIds = tracks.map(track => track.track.artists.map(artist => artist.id)).reduce((a, c) => a.concat(c), []);
     // Deduplicate artists
     const unqiqueArtists: Array<string> = [];
     artistIds.forEach(artistId => {

@@ -30,7 +30,7 @@ export class PlaylistDetailsComponent implements OnChanges {
     const artistIds = this.tracks
       .map(track => track.track.artists
         .map(artist => artist.id))
-      .reduce((a, c) => a.concat(c));
+      .reduce((a, c) => a.concat(c), []);
     const relevantArtists = this.allArtists.filter(artist => artistIds.findIndex(id => id === artist.id) >= 0);
     const genres: Array<MapItem> = [];
 
@@ -58,30 +58,30 @@ export class PlaylistDetailsComponent implements OnChanges {
 
     this.avaragedFeatures.danceability = this.tracks
       .map(track => track.audioFeatures.danceability)
-      .reduce((a, c) => c += a) / this.tracks.length;
+      .reduce((a, c) => c += a, 0) / this.tracks.length;
 
     this.avaragedFeatures.energy = this.tracks
       .map(track => track.audioFeatures.energy)
-      .reduce((a, c) => c += a) / this.tracks.length;
+      .reduce((a, c) => c += a, 0) / this.tracks.length;
 
     this.avaragedFeatures.speechiness = this.tracks
       .map(track => track.audioFeatures.speechiness)
-      .reduce((a, c) => c += a) / this.tracks.length;
+      .reduce((a, c) => c += a, 0) / this.tracks.length;
 
     this.avaragedFeatures.acousticness = this.tracks
       .map(track => track.audioFeatures.acousticness)
-      .reduce((a, c) => c += a) / this.tracks.length;
+      .reduce((a, c) => c += a, 0) / this.tracks.length;
 
     this.avaragedFeatures.instrumentalness = this.tracks
       .map(track => track.audioFeatures.instrumentalness)
-      .reduce((a, c) => c += a) / this.tracks.length;
+      .reduce((a, c) => c += a, 0) / this.tracks.length;
 
     this.avaragedFeatures.liveness = this.tracks
       .map(track => track.audioFeatures.liveness)
-      .reduce((a, c) => c += a) / this.tracks.length;
+      .reduce((a, c) => c += a, 0) / this.tracks.length;
 
     this.avaragedFeatures.valence = this.tracks
       .map(track => track.audioFeatures.valence)
-      .reduce((a, c) => c += a) / this.tracks.length;
+      .reduce((a, c) => c += a, 0) / this.tracks.length;
   }
 }
