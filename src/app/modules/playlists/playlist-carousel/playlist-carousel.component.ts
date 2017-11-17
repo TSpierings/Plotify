@@ -2,11 +2,36 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { PlaylistItem, PlaylistRootObject } from '../../interfaces/playlists';
 import { AuthService } from '../../auth-service/auth-service/auth.service';
+import {
+  trigger,
+  style,
+  animate,
+  transition,
+  stagger,
+  query
+} from '@angular/animations';
 
 @Component({
   selector: 'app-playlist-carousel',
   templateUrl: './playlist-carousel.component.html',
-  styleUrls: ['./playlist-carousel.component.scss']
+  styleUrls: ['./playlist-carousel.component.scss'],
+  animations: [
+    trigger('carouselstate', [
+      transition('* => *', [
+        query('.playlist-card:enter', style({ opacity: '0' }), { optional: true }),
+        query('.playlist-card:enter', [
+          stagger(50, [
+            style({ opacity: '0' }),
+            animate(250, style({ opacity: '1' }))
+          ])
+        ], { optional: true }),
+        query('.playlist-card:leave', [
+          style({ opacity: '1' }),
+          animate(250, style({ opacity: '0' }))
+        ], { optional: true }),
+      ])
+    ])
+  ]
 })
 export class PlaylistCarouselComponent implements OnInit {
 

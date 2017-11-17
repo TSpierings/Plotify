@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [@carouselstate]="playlists?.length">
   <div class="playlist-card" 
     *ngFor="let playlist of playlists"
     (click)="openPlaylist(playlist)"
