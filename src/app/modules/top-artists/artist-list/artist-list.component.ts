@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ArtistItem }  from '../../interfaces/artists'
+import { ArtistItem } from '../../interfaces/artists'
 import {
   trigger,
   style,

@@ -21,17 +21,17 @@ export class HeaderComponent implements OnInit {
   }
 
   selectedItemChanged(item: string) {
-    let timeRange = "";
+    let timeRange = '';
 
-    switch(item) {
+    switch (item) {
       case this.selectableItems[0]:
-        timeRange = "short_term";
+        timeRange = 'short_term';
         break;
       case this.selectableItems[1]:
-        timeRange = "medium_term";
+        timeRange = 'medium_term';
         break;
       case this.selectableItems[2]:
-        timeRange = "long_term";
+        timeRange = 'long_term';
         break;
     }
 

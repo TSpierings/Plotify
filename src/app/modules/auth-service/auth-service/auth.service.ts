@@ -17,8 +17,9 @@ export class AuthService {
     const state = uuid();
     localStorage.setItem('state', state);
 
+    const authorizeApi = 'https://accounts.spotify.com/authorize';
     this.document.location.href =
-      `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
+      `${authorizeApi}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
   }
 
   getToken(): string {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TopArtists, ArtistItem } from '../../interfaces/artists';
 import { AuthService } from '../../auth-service/auth-service/auth.service'
 
@@ -19,8 +19,8 @@ export class LandingPageComponent implements OnInit {
     private router: Router,
     private http: HttpClient) { }
 
-  ngOnInit() {    
-    this.readFragments();    
+  ngOnInit() {
+    this.readFragments();
 
     const token = this.authService.getToken();
 
@@ -34,18 +34,18 @@ export class LandingPageComponent implements OnInit {
 
   private readFragments() {
     this.activatedRoute.fragment.subscribe((fragment: string) => {
-      
+
       if (fragment != null) {
-        let accessToken = fragment.match(/^(.*?)&/)[1].replace('access_token=', '');
-        let expiresIn = Number.parseInt(fragment.match(/expires_in=([0-9]*)/)[1]) * 1000 + new Date().getTime();
-        let state = fragment.match(/state=(.*)/)[1];
+        const accessToken = fragment.match(/^(.*?)&/)[1].replace('access_token=', '');
+        const expiresIn = Number.parseInt(fragment.match(/expires_in=([0-9]*)/)[1]) * 1000 + new Date().getTime();
+        const state = fragment.match(/state=(.*)/)[1];
 
         if (accessToken == null || expiresIn == null || state == null) {
           console.log('Fragmet does not contain tokens!');
           return;
         }
 
-        if (localStorage.getItem('state') != state) {
+        if (localStorage.getItem('state') !== state) {
           console.log('Wrong state identifer!');
           return;
         }

@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({name: 'pitchClass'})
 export class PitchClassPipe implements PipeTransform {
   transform(pitch: number): string {
-    switch(pitch) {
+    switch (pitch) {
         case 0:
             return 'C';
         case 1:
