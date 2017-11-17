@@ -8,6 +8,7 @@ import { HeaderModule } from './modules/header/header.module'
 import { TopArtistsModule } from './modules/top-artists/top-artists.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlaylistsModule } from './modules/playlists/playlists.module';
+import { CurrentlyPlayingModule } from './modules/currently-playing/currently-playing.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PlaylistsModule } from './modules/playlists/playlists.module';
     HeaderModule,
     TopArtistsModule,
     BrowserAnimationsModule,
-    PlaylistsModule
+    PlaylistsModule,
+    CurrentlyPlayingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
