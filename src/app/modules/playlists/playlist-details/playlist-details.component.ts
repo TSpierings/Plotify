@@ -20,7 +20,7 @@ export class PlaylistDetailsComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges() {
-    if (this.tracks != null) {
+    if (this.tracks != null && this.tracks.length > 0) {
       this.setGenres();
       this.calculateFeatureInfo();
     }
@@ -54,34 +54,36 @@ export class PlaylistDetailsComponent implements OnChanges {
   }
 
   calculateFeatureInfo() {
-    this.avaragedFeatures = <AudioFeatures>{};
+    const features = <AudioFeatures>{};
 
-    this.avaragedFeatures.danceability = this.tracks
+    features.danceability = this.tracks
       .map(track => track.audioFeatures.danceability)
       .reduce((a, c) => c += a, 0) / this.tracks.length;
 
-    this.avaragedFeatures.energy = this.tracks
+    features.energy = this.tracks
       .map(track => track.audioFeatures.energy)
       .reduce((a, c) => c += a, 0) / this.tracks.length;
 
-    this.avaragedFeatures.speechiness = this.tracks
+    features.speechiness = this.tracks
       .map(track => track.audioFeatures.speechiness)
       .reduce((a, c) => c += a, 0) / this.tracks.length;
 
-    this.avaragedFeatures.acousticness = this.tracks
+    features.acousticness = this.tracks
       .map(track => track.audioFeatures.acousticness)
       .reduce((a, c) => c += a, 0) / this.tracks.length;
 
-    this.avaragedFeatures.instrumentalness = this.tracks
+    features.instrumentalness = this.tracks
       .map(track => track.audioFeatures.instrumentalness)
       .reduce((a, c) => c += a, 0) / this.tracks.length;
 
-    this.avaragedFeatures.liveness = this.tracks
+    features.liveness = this.tracks
       .map(track => track.audioFeatures.liveness)
       .reduce((a, c) => c += a, 0) / this.tracks.length;
 
-    this.avaragedFeatures.valence = this.tracks
+    features.valence = this.tracks
       .map(track => track.audioFeatures.valence)
       .reduce((a, c) => c += a, 0) / this.tracks.length;
+
+    this.avaragedFeatures = features;
   }
 }
