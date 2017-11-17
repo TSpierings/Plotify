@@ -1,0 +1,10 @@
+$text-light: #f2f2f2;
+$text-dark: #111;
+
+$light: #f2f2f2;
+$dark: #111;
+
+@keyframes fade-in {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
