@@ -1,0 +1,22 @@
+<div class="details-container">
+  <div class="playlist-details">
+    <div class="genre-chart">
+      <app-bar-chart
+        [reversed]="true"
+        [items]="weightedGenres">
+      </app-bar-chart>  
+    </div>
+    <div class="feature-info" *ngIf="avaragedFeatures != null">
+      <span>Avarage of all features</span>
+      <div class="features">
+        <app-feature-image [feature]="avaragedFeatures.danceability" [label]="'dance'"></app-feature-image>
+        <app-feature-image [feature]="avaragedFeatures.energy" [label]="'energy'"></app-feature-image>
+        <app-feature-image [feature]="avaragedFeatures.speechiness" [label]="'speech'"></app-feature-image>
+        <app-feature-image [feature]="avaragedFeatures.acousticness" [label]="'acoustic'"></app-feature-image>
+        <app-feature-image [feature]="avaragedFeatures.instrumentalness" [label]="'instrumental'"></app-feature-image>
+        <app-feature-image [feature]="avaragedFeatures.liveness" [label]="'live'"></app-feature-image>
+        <app-feature-image [feature]="avaragedFeatures.valence" [label]="'valence'"></app-feature-image>
+      </div>
+    </div>
+  </div>
+</div>

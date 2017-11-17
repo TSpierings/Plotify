@@ -16,6 +16,7 @@ export class PlaylistsComponent implements OnInit {
   allArtists: Array<ArtistItem> = [];
   weightedGenres: Array<MapItem>;
   avaragedFeatures: AudioFeatures;
+  tracksInPlaylist: Array<TrackItem>;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -27,7 +28,7 @@ export class PlaylistsComponent implements OnInit {
     if (playlist.fullTracks == null) {
       this.getTracksForPlaylist(this.selectedPlaylist, 0);
     } else {
-      this.setGenres();
+      this.tracksInPlaylist = playlist.fullTracks;
     }
   }
 
@@ -49,8 +50,8 @@ export class PlaylistsComponent implements OnInit {
         if (playlist.fullTracks.length < playlist.tracks.total) {
           this.getTracksForPlaylist(playlist, offset + 100);
         } else {
-          this.getAudioFeatures(playlist.fullTracks);
           this.getArtists(this.selectedPlaylist.fullTracks);
+          this.getAudioFeatures(playlist.fullTracks);
         }
       })
       .catch(error => console.log(error));
@@ -72,7 +73,7 @@ export class PlaylistsComponent implements OnInit {
           response.audio_features.forEach(feature => tracks.find(track => track.track.id === feature.id).audioFeatures = feature);
 
           if (index + 100 >= tracks.length) {
-            this.calculateFeatureInfo();
+            this.tracksInPlaylist = this.selectedPlaylist.fullTracks;
           }
         })
         .catch(error => console.log(error));
@@ -80,6 +81,7 @@ export class PlaylistsComponent implements OnInit {
   }
 
   getArtists(tracks: Array<TrackItem>) {
+    const newAllArtists = this.allArtists;
     // Flatten to array of artist id's
     const artistIds = tracks.map(track => track.track.artists.map(artist => artist.id)).reduce((a, c) => a.concat(c));
     // Deduplicate artists
@@ -97,7 +99,7 @@ export class PlaylistsComponent implements OnInit {
       const token = this.authService.getToken();
       const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
       const url = 'https://api.spotify.com/v1/artists';
-      
+
       const trackString = filteredArtists.slice(index, index + 50).join(',');
 
       const params = new HttpParams().set('ids', trackString);
@@ -105,71 +107,18 @@ export class PlaylistsComponent implements OnInit {
       this.http.get(url, { headers: header, params: params}).toPromise()
         .then(data => {
           const response = data as ArtistRootObject;
-          this.allArtists.push(...response.artists);
-          this.setGenres();
+          newAllArtists.push(...response.artists);
+
+          if (index + 50 < filteredArtists.length) {
+            this.allArtists = newAllArtists;
+          }
         })
         .catch(error => console.log(error));
     }
   }
 
-  setGenres() {
-    const artistIds = this.selectedPlaylist.fullTracks.map(track => track.track.artists.map(artist => artist.id)).reduce((a, c) => a.concat(c));
-    const relevantArtists = this.allArtists.filter(artist => artistIds.findIndex(id => id === artist.id) >= 0);
-    let genres: Array<MapItem> = [];
-    
-    relevantArtists.forEach(artist => artist.genres.forEach(genre => {
-      const item = genres.find(x => x.key === genre);
-
-      if (item) {
-        item.value += 1;
-      } else {
-        genres.push({key: genre, value: 1, normalizedValue: 0});
-      }
-    }));
-
-    const maxValue = genres.reduce((a, c) =>  c.value > a ? c.value : a, 0);
-    
-    genres.forEach(genre => {
-      genre.normalizedValue = genre.value / maxValue;
-    });
-
-    this.weightedGenres = genres.sort((a, b) => b.normalizedValue - a.normalizedValue);
-  }
-
   getArtistNameString(artists: Array<Artist>): string {
     return artists.map(artist => artist.name).join(', ');
-  }
-
-  calculateFeatureInfo() {
-    this.avaragedFeatures = <AudioFeatures>{};
-
-    this.avaragedFeatures.danceability = this.selectedPlaylist.fullTracks
-      .map(track => track.audioFeatures.danceability)
-      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
-
-    this.avaragedFeatures.energy = this.selectedPlaylist.fullTracks
-      .map(track => track.audioFeatures.energy)
-      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
-
-    this.avaragedFeatures.speechiness = this.selectedPlaylist.fullTracks
-      .map(track => track.audioFeatures.speechiness)
-      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
-
-    this.avaragedFeatures.acousticness = this.selectedPlaylist.fullTracks
-      .map(track => track.audioFeatures.acousticness)
-      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
-
-    this.avaragedFeatures.instrumentalness = this.selectedPlaylist.fullTracks
-      .map(track => track.audioFeatures.instrumentalness)
-      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
-
-    this.avaragedFeatures.liveness = this.selectedPlaylist.fullTracks
-      .map(track => track.audioFeatures.liveness)
-      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
-
-    this.avaragedFeatures.valence = this.selectedPlaylist.fullTracks
-      .map(track => track.audioFeatures.valence)
-      .reduce((a, c) => c+=a) / this.selectedPlaylist.fullTracks.length;
   }
 
 }
