@@ -66,6 +66,29 @@
                     width: 100%;
                 }
             }
+        }        
+        
+        @media(max-width: '600px') {
+            flex-direction: column;
+
+            img {
+                width: 100%;
+                height: unset;
+            }
+
+            .data {
+                .title {
+                    .track-name {
+                        font-size: 24px;
+                    }
+
+                    .key-tempo {
+                        font-size: 10px;
+                        text-align: right;
+                        margin-top: 5px;
+                    }
+                }
+            }
         }
     }
 }
