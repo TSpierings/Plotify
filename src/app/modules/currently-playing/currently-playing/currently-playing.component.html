@@ -1,10 +1,13 @@
 <div class="container">
+  <div class="placeholder" *ngIf="!player">
+    <span>There's nothing playing!</span>
+  </div>
   <div class="playing" *ngIf="player">
     <img width="300px" height="300px" src="{{player.item.album.images | imageSize: 300}}"/>
     <div class="data">
       <div class="title">
         <span class="track-name">{{player.item.name}}</span>
-        <span class="key-tempo">C# - 125 bpm</span>
+        <span class="key-tempo">{{currentAudioFeatures?.key | pitchClass}} - {{currentAudioFeatures?.tempo | number: '1.0-0'}} bpm</span>
       </div>
       <div class="details">
         <span>{{player.item.artists[0].name}}</span>

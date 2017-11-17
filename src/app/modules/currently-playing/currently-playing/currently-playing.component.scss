@@ -4,6 +4,12 @@
     display: flex;
     justify-content: center;
 
+    .placeholder {
+        display: flex;
+        align-items: center;
+        height: calc(100vh - 60px);
+    }
+
     .playing {
         display: flex;
         max-width: 1000px;
