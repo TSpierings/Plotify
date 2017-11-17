@@ -29,13 +29,13 @@ export class CurrentlyPlayingComponent implements OnInit {
 
     this.http.get(url, { headers: header, observe: 'response'}).toPromise()
       .then(response => {
-        console.log(response);
-
         if (response.status == 200) {
           const data = response.body as PlayerRootObject;
           this.player = data;
           this.getAlbum(this.player.item.artists[0].id);
           this.getFeatures(this.player.item.id);
+          const refreshInMs = this.player.item.duration_ms - this.player.progress_ms + 1000;
+          setTimeout(() => this.getCurrentlyPlaying(), refreshInMs);
         }
       })
       .catch(error => console.log(error));

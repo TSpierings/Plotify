@@ -25,7 +25,7 @@ export class LandingPageComponent implements OnInit {
     const token = this.authService.getToken();
 
     if (token) {
-      this.router.navigate(['/top-artists']);
+      this.router.navigate(['/currently-playing']);
       return;
     }
 
