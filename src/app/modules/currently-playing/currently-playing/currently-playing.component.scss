@@ -1,0 +1,71 @@
+@import 'src/app/scss/global-styling';
+
+.container {
+    display: flex;
+    justify-content: center;
+
+    .playing {
+        display: flex;
+        max-width: 1000px;
+        width: 100%;
+        margin: 5px;
+        background-color: $dark;
+        color: $text-light;
+
+        img {
+            min-width: 300px;
+            min-height: 300px;
+        }
+
+        .data {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            .title {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                text-overflow: ellipsis;
+                
+                .track-name {
+                    font-size: 36px;
+                }
+            }
+
+            .details {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                text-overflow: ellipsis;
+            }
+    
+            .genres {
+                display: flex;
+                padding: 10px;
+                display: flex;
+                flex-wrap: wrap;
+
+                .genre-label {
+                    margin: 2px;
+                    padding: 0px 5px;
+                    background-color: $light;
+                    color: $dark;
+                    border-radius: 3px;
+                    height: fit-content;
+                }
+            }
+
+            .features {
+                display: flex;
+                padding: 2px;
+                flex-grow: 1;
+                align-items: flex-end;
+    
+                app-feature-image {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

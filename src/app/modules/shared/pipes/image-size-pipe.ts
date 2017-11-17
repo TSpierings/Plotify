@@ -7,7 +7,7 @@ export class ImageSizePipe implements PipeTransform {
     let best = images[0];
 
     images.forEach(image => {
-        if (image.height > minSize && image.height < best.height) {
+        if (image.height >= minSize && image.height < best.height) {
             best = image;
         }
     });

@@ -1,3 +1,27 @@
-<p>
-  currently-playing works!
-</p>
+<div class="container">
+  <div class="playing" *ngIf="player">
+    <img width="300px" height="300px" src="{{player.item.album.images | imageSize: 300}}"/>
+    <div class="data">
+      <div class="title">
+        <span class="track-name">{{player.item.name}}</span>
+        <span class="key-tempo">C# - 125 bpm</span>
+      </div>
+      <div class="details">
+        <span>{{player.item.artists[0].name}}</span>
+        <span>{{player.item.album.name}}</span>
+      </div>
+      <div class="genres">
+        <div class="genre-label" *ngFor="let genre of currentArtist?.genres">{{genre}}</div>
+      </div>
+      <div class="features" *ngIf="currentAudioFeatures != null">
+          <app-feature-image [feature]="currentAudioFeatures.danceability" [label]="'dance'"></app-feature-image>
+          <app-feature-image [feature]="currentAudioFeatures.energy" [label]="'energy'"></app-feature-image>
+          <app-feature-image [feature]="currentAudioFeatures.speechiness" [label]="'speech'"></app-feature-image>
+          <app-feature-image [feature]="currentAudioFeatures.acousticness" [label]="'acoustic'"></app-feature-image>
+          <app-feature-image [feature]="currentAudioFeatures.instrumentalness" [label]="'instrumental'"></app-feature-image>
+          <app-feature-image [feature]="currentAudioFeatures.liveness" [label]="'live'"></app-feature-image>
+          <app-feature-image [feature]="currentAudioFeatures.valence" [label]="'valence'"></app-feature-image>
+      </div>     
+    </div>    
+  </div>
+</div>
