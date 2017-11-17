@@ -12,8 +12,6 @@ import { MapItem } from '../../shared/bar-chart/bar-chart.component';
   styleUrls: ['./playlists.component.scss']
 })
 export class PlaylistsComponent implements OnInit {
-  playlists: Array<PlaylistItem>;
-  uAlbums = new Map<string, number>();
   selectedPlaylist: PlaylistItem;
   allArtists: Array<ArtistItem> = [];
   weightedGenres: Array<MapItem>;
@@ -21,44 +19,16 @@ export class PlaylistsComponent implements OnInit {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  ngOnInit() {
-    this.getPlaylists(0);
-  }
+  ngOnInit() { }
 
   openPlaylist(playlist: PlaylistItem) {
-    if (this.selectedPlaylist !== playlist) {
-      this.selectedPlaylist = playlist;
-      if (playlist.fullTracks == null) {
-        this.getTracksForPlaylist(this.selectedPlaylist, 0);
-      } else {
-        this.setGenres();
-      }
+    this.selectedPlaylist = playlist;
+
+    if (playlist.fullTracks == null) {
+      this.getTracksForPlaylist(this.selectedPlaylist, 0);
+    } else {
+      this.setGenres();
     }
-  }
-
-  getPlaylists(offset: number) {
-    const token = this.authService.getToken();
-    const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    const url = 'https://api.spotify.com/v1/me/playlists';
-    let params = new HttpParams().set('offset', offset.toString());
-    params = params.set('limit', '50');
-
-    this.http.get(url, { headers: header, params: params}).toPromise()
-      .then(data => {
-
-        const response = data as PlaylistRootObject;
-
-        if (this.playlists == null) {
-          this.playlists = response.items;
-        } else {
-          this.playlists.push(...response.items);
-        }        
-
-        if (response.offset + response.limit < response.total) {
-          this.getPlaylists(offset + response.limit);
-        }
-      })
-      .catch(error => console.log(error));
   }
 
   getTracksForPlaylist(playlist: PlaylistItem, offset: number) {

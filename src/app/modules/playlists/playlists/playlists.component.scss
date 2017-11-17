@@ -1,55 +1,5 @@
 @import 'src/app/scss/colors';
 
-.container {
-    display: flex;
-    background-color: $dark;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    border-top: 1px solid $light;
-    height: 225px;
-
-    .playlist-card {
-        display: flex;
-        flex-direction: column;
-        margin: 5px;
-        background-color: $light;
-        color: $text-dark;
-        text-align: center;
-        transition-duration: 250ms;
-
-        &:first-child {
-            margin-left: 0px;
-        }
-
-        &:last-child {
-            margin-right: 0px;
-        }
-
-        .name {
-            display: flex;
-            flex-grow: 1;
-            align-items: center;
-            align-self: center;
-            font-size: 14px
-        }
-
-        .tracks {
-            text-align: right;
-            font-size: 12px;
-            margin-right: 2px;
-        }
-
-        &:hover {
-            cursor: pointer;
-            transform: translateY(5px);
-        }
-    }
-
-    .selected {
-        transform: translateY(5px);
-    }
-}
-
 .details-container {
     display: flex;
     justify-content: center;
