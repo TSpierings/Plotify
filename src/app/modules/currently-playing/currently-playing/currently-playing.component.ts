@@ -19,10 +19,10 @@ export class CurrentlyPlayingComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit() {
-    this.getCurentlyPlaying();
+    this.getCurrentlyPlaying();
   }
 
-  getCurentlyPlaying() {
+  getCurrentlyPlaying() {
     const token = this.authService.getToken();
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
     const url = 'https://api.spotify.com/v1/me/player/currently-playing';
