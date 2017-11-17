@@ -1,6 +1,6 @@
 <div class="details-container">
   <div class="playlist-details">
-    <div class="genre-chart">
+    <div class="genre-chart" *ngIf="weightedGenres != null">
       <app-bar-chart
         [reversed]="true"
         [items]="weightedGenres">
