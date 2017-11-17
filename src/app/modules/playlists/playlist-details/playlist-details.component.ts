@@ -3,7 +3,7 @@ import { AudioFeatures } from '../../interfaces/tracks';
 import { MapItem } from '../../shared/bar-chart/bar-chart.component';
 import { PlaylistItem } from '../../interfaces/playlists';
 import { ArtistItem } from '../../interfaces/artists';
-import { TrackItem } from '../../interfaces/tracks';
+import { Track } from '../../interfaces/tracks';
 
 @Component({
   selector: 'app-playlist-details',
@@ -12,7 +12,7 @@ import { TrackItem } from '../../interfaces/tracks';
 })
 export class PlaylistDetailsComponent implements OnChanges {
 
-  @Input() tracks: Array<TrackItem>;
+  @Input() tracks: Array<Track>;
   @Input() allArtists: Array<ArtistItem> = [];
   avaragedFeatures: AudioFeatures;
   weightedGenres: Array<MapItem>;
@@ -28,7 +28,7 @@ export class PlaylistDetailsComponent implements OnChanges {
 
   setGenres() {
     const artistIds = this.tracks
-      .map(track => track.track.artists
+      .map(track => track.artists
         .map(artist => artist.id))
       .reduce((a, c) => a.concat(c), []);
     const relevantArtists = this.allArtists.filter(artist => artistIds.findIndex(id => id === artist.id) >= 0);

@@ -51,6 +51,9 @@ export interface Track {
     track_number: number;
     type: string;
     uri: string;
+
+    // Custom properties
+    audioFeatures?: AudioFeatures
 }
 
 export interface TrackItem {
@@ -58,9 +61,6 @@ export interface TrackItem {
     added_by: AddedBy;
     is_local: boolean;
     track: Track;
-
-    // Custom properties
-    audioFeatures?: AudioFeatures
 }
 
 export interface TrackRootObject {
@@ -96,4 +96,30 @@ export interface AudioFeatures {
     analysis_url: string;
     duration_ms: number;
     time_signature: number;
+}
+
+export interface HistoryRootObject {
+    items: HistoryItem[];
+    next: string;
+    cursors: Cursors;
+    limit: number;
+    href: string;
+}
+
+export interface HistoryItem {
+    track: Track;
+    played_at: Date;
+    context: Context;
+}
+
+export interface Cursors {
+    after: string;
+    before: string;
+}
+
+export interface Context {
+    uri: string;
+    external_urls: ExternalUrls;
+    href: string;
+    type: string;
 }

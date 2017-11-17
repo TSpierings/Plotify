@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { PlaylistItem, PlaylistRootObject } from '../../interfaces/playlists';
-import { TrackRootObject, TrackItem, Album, AudioFeaturesRootObject, Artist, AudioFeatures } from '../../interfaces/tracks';
+import { TrackRootObject, Track, Album, AudioFeaturesRootObject, Artist, AudioFeatures } from '../../interfaces/tracks';
 import { AuthService } from '../../auth-service/auth-service/auth.service';
 import { ArtistItem, ArtistRootObject} from '../../interfaces/artists';
 import { MapItem } from '../../shared/bar-chart/bar-chart.component';
@@ -16,7 +16,7 @@ export class PlaylistsComponent implements OnInit {
   allArtists: Array<ArtistItem> = [];
   weightedGenres: Array<MapItem>;
   avaragedFeatures: AudioFeatures;
-  tracksInPlaylist: Array<TrackItem>;
+  tracksInPlaylist: Array<Track>;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -46,7 +46,7 @@ export class PlaylistsComponent implements OnInit {
           playlist.fullTracks = [];
         }
 
-        playlist.fullTracks.push(...response.items);
+        playlist.fullTracks.push(...response.items.map(x => x.track));
 
         if (playlist.fullTracks.length < playlist.tracks.total) {
           this.getTracksForPlaylist(playlist, offset + 100);
@@ -58,20 +58,20 @@ export class PlaylistsComponent implements OnInit {
       .catch(error => console.log(error));
   }
 
-  getAudioFeatures(tracks: Array<TrackItem>) {
+  getAudioFeatures(tracks: Array<Track>) {
     for (let index = 0; index < tracks.length; index += 100) {
       const token = this.authService.getToken();
       const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
       const url = 'https://api.spotify.com/v1/audio-features';
 
-      const trackString = tracks.map(track => track.track.id).slice(index, index + 100).join(',');
+      const trackString = tracks.map(track => track.id).slice(index, index + 100).join(',');
 
       const params = new HttpParams().set('ids', trackString);
 
       this.http.get(url, { headers: header, params: params}).toPromise()
         .then(data => {
           const response = data as AudioFeaturesRootObject;
-          response.audio_features.forEach(feature => tracks.find(track => track.track.id === feature.id).audioFeatures = feature);
+          response.audio_features.forEach(feature => tracks.find(track => track.id === feature.id).audioFeatures = feature);
 
           if (index + 100 >= tracks.length) {
             this.tracksInPlaylist = this.selectedPlaylist.fullTracks;
@@ -81,10 +81,10 @@ export class PlaylistsComponent implements OnInit {
     }
   }
 
-  getArtists(tracks: Array<TrackItem>) {
+  getArtists(tracks: Array<Track>) {
     const newAllArtists = this.allArtists;
     // Flatten to array of artist id's
-    const artistIds = tracks.map(track => track.track.artists.map(artist => artist.id)).reduce((a, c) => a.concat(c), []);
+    const artistIds = tracks.map(track => track.artists.map(artist => artist.id)).reduce((a, c) => a.concat(c), []);
     // Deduplicate artists
     const unqiqueArtists: Array<string> = [];
     artistIds.forEach(artistId => {

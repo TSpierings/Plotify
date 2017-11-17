@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TrackItem, Artist } from '../../interfaces/tracks';
+import { Track, Artist } from '../../interfaces/tracks';
 
 @Component({
   selector: 'app-track-card',
@@ -8,7 +8,7 @@ import { TrackItem, Artist } from '../../interfaces/tracks';
 })
 export class TrackCardComponent implements OnInit {
 
-  @Input() track: TrackItem;
+  @Input() track: Track;
 
   constructor() { }
 

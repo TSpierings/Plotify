@@ -1,5 +1,5 @@
 import { ExternalUrls, Image } from './common';
-import { TrackItem } from './tracks';
+import { Track } from './tracks';
 
 export interface Owner {
     display_name: string;
@@ -30,7 +30,7 @@ export interface PlaylistItem {
     uri: string;
 
     // Custom fields
-    fullTracks?: Array<TrackItem>;
+    fullTracks?: Array<Track>;
 }
 
 export interface PlaylistRootObject {
