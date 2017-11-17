@@ -117,8 +117,4 @@ export class PlaylistsComponent implements OnInit {
     }
   }
 
-  getArtistNameString(artists: Array<Artist>): string {
-    return artists.map(artist => artist.name).join(', ');
-  }
-
 }

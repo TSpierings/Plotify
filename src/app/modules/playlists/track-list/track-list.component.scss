@@ -1,0 +1,96 @@
+@import 'src/app/scss/colors';
+
+.track-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .placholder {
+        height: calc(100vh - 286px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .track-list {     
+        margin-top: 5px;   
+        max-width: 1010px;
+        width: 100%;
+
+        .track-card {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px;
+            background-color: $dark;
+            color: $text-light;
+
+            .track-info {
+                display: flex;
+                flex-direction: column;
+                padding: 5px;
+                flex-grow: 1;
+                width: 225px;
+
+                .top-row {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .title {
+                        margin-bottom: 10px;
+                        max-width: 100%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+
+                    .tempo {
+                        height: fit-content;
+                        font-size: 12px;
+                    }
+                }                
+
+                .bottom-row {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 12px;
+
+                    span {
+                        max-width: 50%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                }                
+            }
+
+            .audio-features {
+                display: flex;
+                align-items: center;
+                border-left: 1px solid $light;
+                padding: 2px;
+                width: 401px;
+
+                app-feature-image {
+                    width: 16.6%;
+                    max-width: 60px;
+                }
+            }
+        }
+
+        @media (max-width: 600px) {
+            .track-card {
+                flex-direction: column;
+                
+                .track-info {
+                    width: unset;
+                }
+
+                .audio-features {
+                    border: none;
+                    justify-content: space-between;
+                    width: unset;
+                }
+            }
+        }
+    }
+}
