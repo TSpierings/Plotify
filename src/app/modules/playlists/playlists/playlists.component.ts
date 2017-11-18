@@ -73,7 +73,7 @@ export class PlaylistsComponent implements OnInit {
           const response = data as AudioFeaturesRootObject;
           response.audio_features.forEach(feature => tracks.find(track => track.id === feature.id).audioFeatures = feature);
 
-          if (index + 100 >= tracks.length) {
+          if (tracks.map(track => track.audioFeatures).every(features => features !== undefined)) {
             this.tracksInPlaylist = this.selectedPlaylist.fullTracks;
           }
         })
