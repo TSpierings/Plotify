@@ -11,7 +11,8 @@ export class AuthService {
   login() {
     const clientId = environment.clientID;
     const redirectUri = environment.callbackURL;
-    const scope = 'user-read-private user-read-email user-top-read playlist-read-private user-read-currently-playing user-read-recently-played';
+    const scope =
+    'user-read-private user-read-email user-top-read playlist-read-private user-read-currently-playing user-read-recently-played';
     const responseType = 'token';
 
     const state = uuid();
