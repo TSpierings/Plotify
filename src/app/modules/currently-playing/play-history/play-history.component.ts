@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AuthService } from '../../auth-service/auth-service/auth.service';
 import { HistoryRootObject, HistoryItem, Track, AudioFeaturesRootObject } from '../../interfaces/tracks';
@@ -33,26 +33,43 @@ import {
     ])
   ]
 })
-export class PlayHistoryComponent implements OnInit {
+export class PlayHistoryComponent implements OnInit, OnChanges {
 
+  @Input() newTrack: Track;
   historyItems: Array<HistoryItem> = [];
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit() {
-    this.getHistory();
+    this.getHistory(20);
   }
 
-  getHistory() {
+  ngOnChanges() {
+    if (this.newTrack != null &&  this.historyItems.length > 0) {
+      this.getAudioFeatures([this.newTrack]);
+      const newItem = <HistoryItem>{
+        track: this.newTrack,
+        played_at: new Date(),
+      }
+      const newHistory: Array<HistoryItem> = [newItem];
+      newHistory.push(...this.historyItems);
+      this.historyItems = newHistory;
+    }
+  }
+
+  getHistory(limit: number) {
     const token = this.authService.getToken();
     const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    const params = new HttpParams().set('limit', limit.toString());
     const url = 'https://api.spotify.com/v1/me/player/recently-played';
 
-    this.http.get(url, { headers: header }).toPromise()
+    this.http.get(url, { headers: header, params: params }).toPromise()
       .then(response => {
         const data = response as HistoryRootObject;
-        this.historyItems = data.items;
-        this.getAudioFeatures(this.historyItems.map(x => x.track));
+        const newItems = data.items;
+        this.getAudioFeatures(newItems.map(x => x.track));
+        newItems.push(...this.historyItems);
+        this.historyItems = newItems;
       })
       .catch(error => console.log(error));
   }

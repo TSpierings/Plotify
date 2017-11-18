@@ -1,7 +1,4 @@
 <div class="container">
-  <div class="placeholder" *ngIf="!player">
-    <span>There's nothing playing!</span>
-  </div>
   <div class="playing" *ngIf="player">
     <img width="300px" height="300px" src="{{player.item.album.images | imageSize: 300}}"/>
     <div class="data">
@@ -28,4 +25,4 @@
     </div>    
   </div>
 </div>
-<app-play-history></app-play-history>
+<app-play-history [newTrack]="pushNewTrack"></app-play-history>

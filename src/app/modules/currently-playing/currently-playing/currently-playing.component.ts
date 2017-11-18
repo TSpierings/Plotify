@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AuthService } from '../../auth-service/auth-service/auth.service';
 import { PlayerRootObject } from '../../interfaces/player';
 import { ArtistItem } from '../../interfaces/artists';
-import { AudioFeatures } from '../../interfaces/tracks';
+import { AudioFeatures, Track } from '../../interfaces/tracks';
 
 @Component({
   selector: 'app-currently-playing',
@@ -15,6 +15,7 @@ export class CurrentlyPlayingComponent implements OnInit {
   player: PlayerRootObject;
   currentArtist: ArtistItem;
   currentAudioFeatures: AudioFeatures;
+  pushNewTrack: Track;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -29,13 +30,16 @@ export class CurrentlyPlayingComponent implements OnInit {
 
     this.http.get(url, { headers: header, observe: 'response'}).toPromise()
       .then(response => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           const data = response.body as PlayerRootObject;
           this.player = data;
           this.getAlbum(this.player.item.artists[0].id);
           this.getFeatures(this.player.item.id);
           const refreshInMs = this.player.item.duration_ms - this.player.progress_ms + 1000;
-          setTimeout(() => this.getCurrentlyPlaying(), refreshInMs);
+          setTimeout(() => {
+            this.pushNewTrack = this.player.item;
+            this.getCurrentlyPlaying();
+          }, refreshInMs);
         }
       })
       .catch(error => console.log(error));
