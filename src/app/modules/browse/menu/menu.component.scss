@@ -1,0 +1,27 @@
+@import 'src/app/scss/global-styling';
+
+.container {
+    height: 100px;
+    background-color: $dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .searchbar {
+        background-color: $light;
+        color: $text-dark;
+        width: 80%;
+        height: 20px;
+        border: none;
+        padding: 3px;
+    }
+
+    .button {
+        background-color: $light;
+        margin-left: 10px;
+        height: 20px;
+        padding: 3px 5px;
+        text-align: center;
+        line-height: 20px;
+    }
+}

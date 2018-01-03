@@ -1,0 +1,4 @@
+<div class="container">
+  <input #searchbar class="searchbar" type="text" (keyup.enter)="search.emit(searchbar.value)"/>
+  <div class="button" (click)="search.emit(searchbar.value)">Search</div>  
+</div>

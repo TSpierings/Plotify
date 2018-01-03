@@ -22,6 +22,7 @@ export interface Album {
     type: string;
     uri: string;
 }
+
 export interface ExternalIds {
     isrc: string;
 }

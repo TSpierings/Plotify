@@ -5,12 +5,14 @@ import { LandingPageComponent } from '../landing-page/landing-page/landing-page.
 import { TopArtistsComponent } from '../top-artists/top-artists/top-artists.component'
 import { PlaylistsComponent } from '../playlists/playlists/playlists.component';
 import { CurrentlyPlayingComponent } from '../currently-playing/currently-playing/currently-playing.component';
+import { BrowseComponent } from 'app/modules/browse/browse/browse.component';
 
 const appRoutes = [
   { path: '', component: LandingPageComponent },
   { path: 'top-artists', component: TopArtistsComponent },
   { path: 'playlists', component: PlaylistsComponent },
-  { path: 'currently-playing', component: CurrentlyPlayingComponent }
+  { path: 'currently-playing', component: CurrentlyPlayingComponent },
+  { path: 'browse', component: BrowseComponent }
 ];
 
 @NgModule({
