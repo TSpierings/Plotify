@@ -5,6 +5,7 @@ import { SearchRootObject } from 'app/modules/interfaces/search';
 import { ArtistItem } from 'app/modules/interfaces/artists';
 import { TrackItem, Track, AudioFeaturesRootObject, Artist } from 'app/modules/interfaces/tracks';
 import { Album } from 'app/modules/interfaces/player';
+import { AlbumRootObject, AlbumEnvelope } from 'app/modules/interfaces/albums';
 
 @Component({
   selector: 'app-browse',
@@ -15,7 +16,7 @@ export class BrowseComponent implements OnInit {
 
   artists: Array<ArtistItem>;
   tracks: Array<Track>
-  albums: Array<Album>;
+  albums: Array<AlbumRootObject>;
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
@@ -38,7 +39,8 @@ export class BrowseComponent implements OnInit {
         this.artists = searchData.artists.items;
         this.getAudioFeatures(searchData.tracks.items);
         this.tracks = searchData.tracks.items;
-        this.albums = searchData.albums.items;
+        this.getAlbums(searchData.albums.items);
+        // this.albums = searchData.albums.items;
       })
       .catch(error => console.log(error));
   }
@@ -58,10 +60,27 @@ export class BrowseComponent implements OnInit {
           const response = data as AudioFeaturesRootObject;
           const actualFeatures = response.audio_features.filter(feature => !!feature);
           actualFeatures.forEach(feature => tracks.find(track => track.id === feature.id).audioFeatures = feature);
-          console.log(tracks);
         })
         .catch(error => console.log(error));
     }
+  }
+
+  getAlbums(albums: Array<Album>) {
+    const token = this.authService.getToken();
+    const header = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    const url = 'https://api.spotify.com/v1/albums';
+
+    const albumString = albums.map(album => album.id).join(',');
+
+    const params = new HttpParams().set('ids', albumString);
+
+    this.http.get(url, { headers: header, params: params}).toPromise()
+      .then(data => {
+        const response = data as AlbumEnvelope;
+        this.albums = response.albums;
+        console.log(response);
+      })
+      .catch(error => console.log(error));
   }
 
   getArtistNameString(artists: Array<Artist>): string {

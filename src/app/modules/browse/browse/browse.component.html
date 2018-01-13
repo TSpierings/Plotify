@@ -2,17 +2,6 @@
 <div class="results">
     <div class="list">
         <span>Artists</span>
-        <!-- <div class="card" *ngFor="let artist of artists">
-            <div class="top">
-                <img width="64" height="64" src="{{artist.images | imageSize: 64}}"/>
-                <div class="data">
-                    <span>{{artist.name}}</span>
-                    <span>Popularity: {{artist.popularity}}</span>
-                    <span>Followers: {{artist.followers.total}}</span>
-                </div>
-            </div>            
-            <div class="bottom"></div>
-        </div> -->
         <app-artist-card *ngFor="let artist of artists" [artist]="artist"></app-artist-card>
     </div>
     <div class="list">
@@ -26,9 +15,12 @@
                 <img width="64" height="64" src="{{album.images | imageSize: 64}}"/>
                 <div class="data">
                     <span>{{album.name}}</span>
+                    <span>{{getArtistNameString(album.artists)}}</span>
                 </div>
             </div>
-            <div class="bottom"></div>
+            <div class="bottom">
+                <span *ngFor="let track of album.tracks.items; let i = index">{{i + 1}}. {{track.name}}</span>
+            </div>
         </div>
     </div>
 </div>

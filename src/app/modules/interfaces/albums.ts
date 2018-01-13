@@ -40,3 +40,7 @@ export interface Tracks {
     previous?: any;
     total: number;
 }
+
+export interface AlbumEnvelope {
+    albums: Array<AlbumRootObject>;
+}
