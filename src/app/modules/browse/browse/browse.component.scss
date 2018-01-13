@@ -60,15 +60,16 @@
             }
         }
 
+        app-artist-card {
+            display: flex;
+            flex-grow: 1;
+            width: 100%;
+        }
+
         app-track-card {
             display: flex;
             flex-grow: 1;
             width: 100%;
-
-            >.track-card {
-                width: 100%;
-                margin: 5px 0;
-            }
         }
     }
 }

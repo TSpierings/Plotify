@@ -6,7 +6,7 @@
       <span>Popularity: {{artist.popularity}}</span>
       <span>Followers: {{artist.followers.total}}</span>
     </div>
-    <div class="rank">
+    <div class="rank" *ngIf="rank">
       <span>{{rank}}</span>
     </div>
   </div>

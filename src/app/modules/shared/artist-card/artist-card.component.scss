@@ -1,11 +1,12 @@
 @import 'src/app/scss/global-styling';
 
 .artist-card {  
+    display: flex;
+    flex-direction: column;
     margin: 5px;
     background-color: $dark;
     color: $text-light;
-    max-width: 500px;
-    height: calc(100% - 10px);
+    width: 100%;
 
     .top {
         display: flex;
@@ -35,6 +36,7 @@
     }
 
     .bottom {
+        flex-grow: 1;
         padding: 2px;
 
         .genres {
