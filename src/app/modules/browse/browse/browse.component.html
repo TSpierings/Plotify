@@ -1,1 +1,56 @@
 <app-menu (search)="search($event)"></app-menu>
+<div class="results">
+    <div class="list">
+        <span>Artists</span>
+        <div class="card" *ngFor="let artist of artists">
+            <div class="top">
+                <img width="64" height="64" src="{{artist.images | imageSize: 64}}"/>
+                <div class="data">
+                    <span>{{artist.name}}</span>
+                    <span>Popularity: {{artist.popularity}}</span>
+                    <span>Followers: {{artist.followers.total}}</span>
+                </div>
+            </div>            
+            <div class="bottom"></div>
+        </div>
+    </div>
+    <div class="list">
+        <span>Tracks</span>
+        <!-- <div class="card" *ngFor="let track of tracks">
+            <div class="top">
+                <div class="data">
+                    <span>{{track.name}}</span>
+                    <br>
+                    <div class="splitrow">
+                        <span>{{getArtistNameString(track.artists)}}</span>
+                        <span>{{track.album.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="audio-features" *ngIf="track.audioFeatures">
+                    <app-feature-image [feature]="track.audioFeatures.danceability" [label]="'dance'"></app-feature-image>
+                    <app-feature-image [feature]="track.audioFeatures.energy" [label]="'energy'"></app-feature-image>
+                    <app-feature-image [feature]="track.audioFeatures.speechiness" [label]="'speech'"></app-feature-image>
+                    <app-feature-image [feature]="track.audioFeatures.acousticness" [label]="'acoustic'"></app-feature-image>
+                    <app-feature-image [feature]="track.audioFeatures.instrumentalness" [label]="'instrumental'"></app-feature-image>
+                    <app-feature-image [feature]="track.audioFeatures.liveness" [label]="'live'"></app-feature-image>
+                    <app-feature-image [feature]="track.audioFeatures.valence" [label]="'valence'"></app-feature-image>
+                </div>
+            </div>
+        </div> -->
+        <app-track-card *ngFor="let track of tracks" [track]="track" [small]="true"></app-track-card>
+    </div>
+    <div class="list">
+        <span>Albums</span>
+        <div class="card" *ngFor="let album of albums">
+            <div class="top">
+                <img width="64" height="64" src="{{album.images | imageSize: 64}}"/>
+                <div class="data">
+                    <span>{{album.name}}</span>
+                </div>
+            </div>
+            <div class="bottom"></div>
+        </div>
+    </div>
+</div>

@@ -3,9 +3,10 @@
 .track-card {
     display: flex;
     justify-content: space-between;
-    margin: 5px;
+    margin: 5px 0;
     background-color: $dark;
     color: $text-light;
+    width: 100%;
 
     .track-info {
         display: flex;
@@ -13,6 +14,7 @@
         padding: 5px;
         flex-grow: 1;
         width: 225px;
+        justify-content: space-between;
 
         .top-row {
             display: flex;
@@ -52,11 +54,25 @@
         border-left: 1px solid $light;
         padding: 2px;
         width: 401px;
+        overflow-x: auto;
 
         app-feature-image {
-            width: 16.6%;
-            max-width: 60px;
+            min-width: 56px;
         }
+    }
+}
+
+.small {
+    flex-direction: column;
+    
+    .track-info {
+        width: unset;
+    }
+
+    .audio-features {
+        border: none;
+        justify-content: space-between;
+        width: unset;
     }
 }
 

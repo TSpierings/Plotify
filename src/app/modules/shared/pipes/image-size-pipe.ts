@@ -12,6 +12,6 @@ export class ImageSizePipe implements PipeTransform {
         }
     });
 
-    return best.url;
+    return best ? best.url : './assets/pico.png';
   }
 }

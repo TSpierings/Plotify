@@ -1,6 +1,6 @@
 import { ArtistItem } from './artists';
 import { Album } from './player';
-import { TrackItem } from './tracks';
+import { Track } from './tracks';
 
 export interface Collection {
     href: string,
@@ -20,7 +20,7 @@ export interface AlbumCollection extends Collection {
 }
 
 export interface TrackCollection extends Collection {
-    items: Array<TrackItem>
+    items: Array<Track>
 }
 
 export interface SearchRootObject {

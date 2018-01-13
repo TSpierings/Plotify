@@ -9,6 +9,7 @@ import { Track, Artist } from '../../interfaces/tracks';
 export class TrackCardComponent implements OnInit {
 
   @Input() track: Track;
+  @Input() small: boolean;
 
   constructor() { }
 
