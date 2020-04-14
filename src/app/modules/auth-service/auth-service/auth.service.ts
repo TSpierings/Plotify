@@ -1,12 +1,11 @@
-import { Injectable, Inject, } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class AuthService {
 
-  constructor(@Inject(DOCUMENT) private document: any) { }
+  constructor() { }
 
   login() {
     const clientId = environment.clientID;
@@ -19,7 +18,7 @@ export class AuthService {
     localStorage.setItem('state', state);
 
     const authorizeApi = 'https://accounts.spotify.com/authorize';
-    this.document.location.href =
+    document.location.href =
       `${authorizeApi}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
   }
 
